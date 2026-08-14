@@ -1,0 +1,135 @@
+/* --- styles/themes/style-theme-scheme-contrast.css --- */
+
+/* =========================================================
+   1. MODO SISTEMA OPERATIVO (Automático / prefers-contrast)
+   ========================================================= */
+@media (prefers-contrast: more) {
+    :root {
+        color-scheme: dark;
+        background-color: #000000 !important;
+        color: #FFFFFF !important;
+
+        /* --- Fondos y Superficies --- */
+        --color-background: #000000;
+        --color-surface: #000000;
+        --color-card-bg: #000000;
+        --color-mask-gradient: rgba(0, 0, 0, 0.9);
+
+        /* --- Textos (Máximo Contraste Blanco/Negro) --- */
+        --color-primary: #FFFFFF;
+        --color-secondary: #BDBDBD;
+        --color-header-text: #FFFFFF;
+        --color-footer-text: #FFFFFF;
+        
+        /* --- Acentos e Interactividad (Cian de Alto Contraste) --- */
+        --color-accent: #00FFFF;
+        --color-accent-bg: rgba(0, 255, 255, 0.1);
+        --color-btn-primary-bg: #00FFFF;
+        
+        /* --- Bordes --- */
+        --color-border: #FFFFFF;
+        --color-input-border: #FFFFFF;
+        --color-card-border-disabled: #BDBDBD;
+        --color-border-placeholder: #BDBDBD;
+
+        /* --- Estados Semánticos (Puros para máxima visibilidad) --- */
+        --color-success: #00FF00;
+        --color-success-bg: rgba(0, 255, 0, 0.2);
+        --color-danger: #FF0000;
+        --color-danger-bg: rgba(255, 0, 0, 0.2);
+        --color-fire: #FF931E;
+        --color-highlight: #ffff00;
+        --color-highlight-text: #000000;
+
+        /* --- Sombras (Anuladas para evitar ruido visual) --- */
+        --color-shadow-primary: transparent;
+        --color-shadow-disabled: transparent;
+        --color-shadow-modal: rgba(255, 255, 255, 0.2);
+        --shadow-color-hex: #FFFFFF;
+        --shadow-opacity: 0;
+
+        /* --- UI Específica --- */
+        --color-toast-bg: #FFFFFF;
+        --color-toast-text: #000000;
+        --color-details-action-item-hover: rgba(0, 255, 255, 0.2);
+        --ui-readonly-bg: #222222;
+        
+        /* --- Branding --- */
+        --color-icon-obras: #FFFF00;
+        --color-logo-static: #FFFFFF;
+        --color-logo-dynamic: var(--color-icon-obras);
+
+        /* --- Accesibilidad Modal --- */
+        --color-a11y-selected-text: #000000;
+        --color-a11y-slider-track: #FFFFFF;
+        --color-a11y-slider-labels: #FFFFFF;
+        --color-separator: #FFFFFF;
+    }
+}
+
+/* =========================================================
+   2. MODO MANUAL (Inyectado en body[data-theme="contrast"])
+   ========================================================= */
+body[data-theme="contrast"] {
+    color-scheme: dark;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+
+    /* --- Fondos y Superficies --- */
+    --color-background: #000000;
+    --color-surface: #000000;
+    --color-card-bg: #000000;
+    --color-mask-gradient: rgba(0, 0, 0, 0.9);
+
+    /* --- Textos --- */
+    --color-primary: #FFFFFF;
+    --color-secondary: #BDBDBD;
+    --color-header-text: #FFFFFF;
+    --color-footer-text: #FFFFFF;
+    
+    /* --- Acentos --- */
+    --color-accent: #00FFFF;
+    --color-accent-bg: rgba(0, 255, 255, 0.1);
+    --color-btn-primary-bg: #00FFFF;
+    
+    /* --- Bordes --- */
+    --color-border: #FFFFFF;
+    --color-input-border: #FFFFFF;
+    --color-card-border-disabled: #BDBDBD;
+    --color-border-placeholder: #BDBDBD;
+
+    /* --- Estados Semánticos --- */
+    --color-success: #00FF00;
+    --color-success-bg: rgba(0, 255, 0, 0.2);
+    --color-danger: #FF0000;
+    --color-danger-bg: rgba(255, 0, 0, 0.2);
+    --color-fire: #FF931E;
+    --color-highlight: #ffff00;
+    --color-highlight-text: #000000;
+
+    /* --- Sombras --- */
+    --color-shadow-primary: transparent;
+    --color-shadow-disabled: transparent;
+    --color-shadow-modal: rgba(255, 255, 255, 0.2);
+    --shadow-color-hex: #FFFFFF;
+    --shadow-opacity: 0;
+
+    /* --- UI Específica --- */
+    --color-toast-bg: #FFFFFF;
+    --color-toast-text: #000000;
+    --color-details-action-item-hover: rgba(0, 255, 255, 0.2);
+    --ui-readonly-bg: #222222;
+    
+    /* --- Branding --- */
+    --color-icon-obras: #FFFF00;
+    --color-logo-static: #FFFFFF;
+    --color-logo-dynamic: var(--color-icon-obras);
+
+    /* --- Accesibilidad Modal --- */
+    --color-a11y-selected-text: #000000;
+    --color-a11y-slider-track: #FFFFFF;
+    --color-a11y-slider-labels: #FFFFFF;
+    --color-separator: #FFFFFF;
+}
+
+/* --- styles/themes/style-theme-scheme-contrast.css --- */

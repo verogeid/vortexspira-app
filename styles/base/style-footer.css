@@ -1,0 +1,195 @@
+/* --- styles/base/style-footer.css --- */
+
+footer {
+    position: relative;
+    width: var(--size-full);
+    height: var(--footer-height);
+
+    flex-shrink: 0;
+    min-height: var(--footer-height);
+
+    background-color: var(--color-surface);
+    border-top: var(--border-width-idle) solid var(--color-border);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-none);
+
+    /* 🟢 Para el modo Safe Mode (Alto <= 280px) definido en layout.css */
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+/* 🟢 DEGRADADOS VISUALES (Affordances) */
+footer::before,
+footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--ui-hit-area) - 4px);
+    pointer-events: none; /* Crucial: no bloquear interacciones táctiles ni de ratón */
+    z-index: 5;
+    opacity: 0; /* Inician apagados */
+    transition: opacity var(--transition-linear) ease-in-out;
+}
+footer::before {
+    left: 0;
+    background: linear-gradient(to right, var(--footer-sentinel-color) var(--footer-sentinel-opacity), transparent);
+}
+footer::after {
+    right: 0;
+    background: linear-gradient(to left, var(--footer-sentinel-color) var(--footer-sentinel-opacity), transparent);
+}
+
+/* Clases dinámicas inyectadas por el IntersectionObserver */
+footer.has-scroll-left::before {
+    opacity: 1;
+}
+footer.has-scroll-right::after {
+    opacity: 1;
+}
+
+/* 🟢 CONTENEDOR DE SCROLL NATIVO */
+footer .buttons-container {
+    display: flex;
+    width: var(--size-full);
+
+    /* 🟢 EL FIX: Caja de scroll expandida hacia arriba */
+    /* La hacemos más alta, la desplazamos hacia arriba, y empujamos 
+       el contenido hacia abajo para que quede centrado. */
+    height: calc(100% + var(--translate-focus));
+    margin-top: calc(-1 * var(--translate-focus));
+    padding-top: var(--translate-focus);
+
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-sm);
+
+    /* Configuración de Scroll AAA */
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none; /* Firefox */
+    scroll-snap-type: x mandatory; /* Scroll magnético */
+    scroll-behavior: var(--scroll-behavior);
+    
+    /* 🟢 EL FIX DEL FOCO: Obliga al navegador a dejar margen al tabular */
+    scroll-padding-inline: var(--spacing-lg);
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+footer .buttons-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+/* 🟢 CENTINELAS PARA EL OBSERVER */
+.scroll-sentinel {
+    flex: 0 0 var(--footer-sentinel-width);
+    width: var(--footer-sentinel-width);
+    height: 100%;
+    visibility: hidden;
+
+    /* Evitamos que el scroll magnético se quede atascado a medias */
+    scroll-snap-align: start;
+}
+
+#nav-toolbar,
+#config-toolbar,
+#copy-toolbar {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    /* Evita que flexbox aplaste los toolbars cuando el espacio es reducido */
+    flex-shrink: 0;
+    scroll-snap-align: start;
+}
+/* Emulamos el space-between original empujando el grupo central */
+#copy-toolbar {
+    margin-inline: auto;
+}
+
+/* 🟢 CÁPSULA AISLANTE ANTI-VIBRACIÓN */
+.btn-wrapper {
+    width: var(--ui-hit-area);
+    height: var(--footer-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-ghost-footer {
+    width: var(--ui-hit-area);
+    height: var(--ui-hit-area);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important; 
+
+    border: var(--border-width-idle) solid transparent;
+    border-radius: var(--radius-lg);
+
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+    outline: none; 
+
+    cursor: pointer;
+}
+
+.btn-ghost-footer[aria-disabled=true] {
+    opacity: var(--opacity-disabled);
+    border-radius: var(--radius-circle);
+    cursor: not-allowed;
+}
+
+/* 🟢 HOVER: Borde de 2px coloreado */
+.btn-ghost-footer:hover {
+    border-color: var(--color-accent);
+}
+
+/* 🟢 FOCUS: Borde de 4px, Icono teñido y Scale (Absorbido por el wrapper) */
+/* 1. Al recibir el foco, el botón enciende su borde, pero NO cambia de tamaño físico */
+.btn-ghost-footer:focus,
+.btn-ghost-footer:focus-visible {
+    /* Elevamos el botón hacia arriba */
+    transform: translateY(calc(-1 * var(--translate-focus)));
+    
+    /* Mantenemos el grosor de borde idle para no ganar ancho/alto físico */
+    border-width: var(--border-width-idle); 
+    border-color: var(--color-accent);
+    background-color: var(--color-surface) !important;
+}
+
+/* 🟢 3. LA MAGIA: Cuando el botón tiene foco, escalamos su hijo (el icono) 
+   Fíjate que hay un ESPACIO, no un signo + */
+.btn-ghost-footer:focus .icon-svg,
+.btn-ghost-footer:focus-visible .icon-svg {
+    transform: none; 
+    background-color: var(--color-accent);
+}
+
+/* ========================================================
+   🚨 MODO EMERGENCIA SAFE MODE (WCAG 400% / Alto <= 280px)
+   ======================================================== */
+body[data-safe-mode="true"] footer {
+    /* Bajamos el footer a 50px (mínimo funcional para botones de 44px + margen) */
+    height: var(--footer-height-safe-mode) !important;
+    min-height: var(--footer-height-safe-mode) !important;
+    padding: 0 var(--spacing-xs) !important;
+}
+
+body[data-safe-mode="true"] .btn-wrapper {
+    /* Alineamos los botones al centro del nuevo footer más bajo */
+    height: var(--footer-height-safe-mode) !important;
+}
+
+body[data-safe-mode="true"] #nav-toolbar, 
+body[data-safe-mode="true"] #config-toolbar {
+    /* 🟢 Reducimos la separación entre botones al mínimo vital (2px) */
+    gap: var(--spacing-px-2); 
+}
+
+/* --- styles/base/style-footer.css --- */

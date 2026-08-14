@@ -1,0 +1,175 @@
+/* --- styles/themes/style-theme-scheme-forced.css --- */
+
+/* =========================================================
+   1. MODO SISTEMA OPERATIVO (forced-colors: active)
+   ========================================================= */
+@media (forced-colors: active) {
+    :root {
+        /* Forzamos el esquema del sistema */
+        color-scheme: light dark;
+
+        /* --- Fondos y Superficies --- */
+        --color-background: Canvas !important;
+        --color-surface: Canvas !important;
+        --color-card-bg: Canvas !important;
+        --color-mask-gradient: Canvas !important;
+
+        /* --- Textos del Sistema --- */
+        --color-primary: CanvasText !important;
+        --color-secondary: CanvasText !important;
+        --color-header-text: CanvasText !important;
+        --color-footer-text: CanvasText !important;
+        
+        /* --- Acentos e Interactividad --- */
+        --color-accent: Highlight !important;
+        --color-accent-bg: transparent !important;
+        --color-btn-primary-bg: Highlight !important;
+        
+        /* --- Bordes --- */
+        --color-border: CanvasText !important;
+        --color-input-border: CanvasText !important;
+        --color-card-border-disabled: GrayText !important;
+        --color-border-placeholder: GrayText !important;
+
+        /* --- Estados Semánticos (Mapeados a texto) --- */
+        --color-success: CanvasText !important;
+        --color-success-bg: transparent !important;
+        --color-danger: CanvasText !important;
+        --color-danger-bg: transparent !important;
+        --color-fire: CanvasText !important;
+        --color-highlight: Mark !important;
+        --color-highlight-text: MarkText !important;
+
+        /* --- Sombras y Efectos (Anulados en FC) --- */
+        --color-shadow-primary: transparent !important;
+        --color-shadow-disabled: transparent !important;
+        --color-shadow-modal: transparent !important;
+        --shadow-color-hex: transparent !important;
+        --shadow-opacity: 0 !important;
+
+        /* --- UI Específica --- */
+        --color-toast-bg: Canvas !important;
+        --color-toast-text: CanvasText !important;
+        --color-details-action-item-hover: transparent !important;
+        --ui-readonly-bg: Canvas !important;
+        
+        /* --- Branding --- */
+        --color-icon-obras: CanvasText !important;
+        --color-logo-static: GrayText !important;
+        --color-logo-dynamic: CanvasText !important;
+
+        /* --- Accesibilidad Modal --- */
+        --color-a11y-selected-text: HighlightText !important;
+        --color-a11y-slider-track: CanvasText !important;
+        --color-a11y-slider-labels: GrayText !important;
+        --color-separator: CanvasText !important;
+    }
+
+    /* 🛡️ Protección para elementos que DEBEN mantener su color táctil */
+    button:focus,
+    .active,
+    [aria-selected="true"] {
+        forced-color-adjust: none !important;
+        background-color: Highlight !important;
+        color: HighlightText !important;
+    }
+
+    /* Ajustes de alto contraste para el Toast */
+    .visual-toast {
+        background-color: CanvasText !important;
+        color: Canvas !important;
+        border: 2px solid Highlight !important;
+    }
+}
+
+/* =========================================================
+   2. MODO MANUAL (body[data-theme="forced"])
+   ========================================================= */
+body[data-theme="forced"] {
+    color-scheme: light dark;
+
+    /* --- Fondos y Superficies --- */
+    --color-background: Canvas !important;
+    --color-surface: Canvas !important;
+    --color-card-bg: Canvas !important;
+    --color-mask-gradient: Canvas !important;
+
+    /* --- Textos --- */
+    --color-primary: CanvasText !important;
+    --color-secondary: CanvasText !important;
+    --color-header-text: CanvasText !important;
+    --color-footer-text: CanvasText !important;
+    
+    /* --- Acentos --- */
+    --color-accent: Highlight !important;
+    --color-accent-bg: transparent !important;
+    --color-btn-primary-bg: Highlight !important;
+    
+    /* --- Bordes --- */
+    --color-border: CanvasText !important;
+    --color-input-border: CanvasText !important;
+    --color-card-border-disabled: GrayText !important;
+    --color-border-placeholder: GrayText !important;
+
+    /* --- Estados Semánticos --- */
+    --color-success: CanvasText !important;
+    --color-success-bg: transparent !important;
+    --color-danger: CanvasText !important;
+    --color-danger-bg: transparent !important;
+    --color-fire: CanvasText !important;
+    --color-highlight: Mark !important;
+    --color-highlight-text: MarkText !important;
+
+    /* --- Sombras --- */
+    --color-shadow-primary: transparent !important;
+    --color-shadow-disabled: transparent !important;
+    --color-shadow-modal: transparent !important;
+    --shadow-color-hex: transparent !important;
+    --shadow-opacity: 0 !important;
+
+    /* --- UI Específica --- */
+    --color-toast-bg: Canvas !important;
+    --color-toast-text: CanvasText !important;
+    --color-details-action-item-hover: transparent !important;
+    --ui-readonly-bg: Canvas !important;
+    
+    /* --- Branding --- */
+    --color-icon-obras: CanvasText !important;
+    --color-logo-static: GrayText !important;
+    --color-logo-dynamic: CanvasText !important;
+
+    /* --- Accesibilidad Modal --- */
+    --color-a11y-selected-text: HighlightText !important;
+    --color-a11y-slider-track: CanvasText !important;
+    --color-a11y-slider-labels: GrayText !important;
+    --color-separator: CanvasText !important;
+}
+
+/* 🛡️ Corrección de interacción en modo manual forzado */
+body[data-theme="forced"] button:not(.tab-btn):not(#btn-a11y-reset):focus,
+body[data-theme="forced"] input[type="range"]:focus::-webkit-slider-thumb,
+body[data-theme="forced"] .a11y-option-btn.active {
+    forced-color-adjust: none !important;
+    background-color:  CanvasText !important;
+    color: Canvas !important;
+}
+body[data-theme="forced"] button:not(.tab-btn):not(#btn-a11y-reset):focus,
+body[data-theme="forced"] input[type="range"]:focus::-webkit-slider-thumb {
+    border-color: Highlight !important;
+}
+/* Y específicamente para tu checkbox customizado cuando está marcado */
+body[data-theme="forced"] input[type="checkbox"]:checked + .custom-check {
+    background-color: CanvasText !important;
+    
+}
+body[data-theme="forced"] input[type="checkbox"]:focus + .custom-check {
+    border-color: Highlight !important;
+}
+
+body[data-theme="forced"] .visual-toast {
+    background-color: CanvasText !important;
+    color: Canvas !important;
+    border: 2px solid Highlight !important;
+}
+
+/* --- styles/themes/style-theme-scheme-forced.css --- */

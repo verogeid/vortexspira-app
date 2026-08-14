@@ -1,0 +1,71 @@
+<!-- app/index.html -->
+<!DOCTYPE html>
+<html lang="es-ES">
+    <head>
+        <meta charset="UTF-8" />
+        <base href="/">
+        <meta name="viewport" 
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>VortexSpira - Lógica Universal: El Patrón Oculto</title>
+
+        <script>
+            window.VORTEX_CONFIG = {
+                coursePath: "data/demo/course.vsj", 
+                courseLang: "es",
+                engineVersion: "v0.0.1"
+            };
+        </script>
+
+        <link rel="manifest" href="/data/demo/manifest.json">
+        
+        <link rel="icon" href="/data/demo/favicon.png" type="image/png">
+
+        <link rel="preload" href="/resources/fonts/AtkinsonHyperlegible-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="/resources/fonts/Lexend-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="/resources/fonts/AtkinsonHyperlegible-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="/resources/fonts/Lexend-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="/styles/themes/style-theme.css">
+        <link rel="stylesheet" href="/styles/layouts/style-layout.css">
+        <link rel="stylesheet" href="/styles/base/style-brand.css">
+        <link rel="stylesheet" href="/styles/base/style-header.css">
+        <link rel="stylesheet" href="/styles/base/style-footer.css">
+        <link rel="stylesheet" href="/styles/components/style-ui-controls.css">
+        <link rel="stylesheet" href="/styles/speech.css" />
+
+        <link rel="preload" href="/styles/base/style-fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/styles/base/style-fonts.css"></noscript>
+
+        <link rel="preload" href="/styles/media/style-media-base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/styles/media/style-media-base.css"></noscript>
+
+        <link rel="preload" href="/styles/media/style-media-menu.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/styles/media/style-media-menu.css"></noscript>
+
+        <link rel="stylesheet" href="/styles/base/style-reduce-motion.css">
+
+        <link rel="stylesheet" href="/styles/themes/style-theme-scheme-light.css">
+        <link rel="stylesheet" href="/styles/themes/style-theme-scheme-dark.css">
+        <link rel="stylesheet" href="/styles/themes/style-theme-scheme-contrast.css">
+        <link rel="stylesheet" href="/styles/themes/style-theme-scheme-forced.css">
+        <link rel="stylesheet" href="/styles/themes/style-theme-scheme-forced-mobile.css">
+        <link rel="stylesheet" href="/styles/themes/style-theme-scheme-yellow.css">
+        
+        <script src="/code/core/speech.js" type="module" defer></script>
+    </head>
+    <body>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+                        .then(registration => {
+                            console.log('[PWA] SW registrado con éxito en scope:', registration.scope);
+                        })
+                        .catch(err => {
+                            console.error('[PWA] Fallo en el registro del SW:', err);
+                        });
+                });
+            }
+        </script>
+    </body>
+</html>

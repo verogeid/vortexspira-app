@@ -1,0 +1,13 @@
+/* ======================================================= */
+/* === MAIN SPEECH CSS (Índice de Importaciones) === */
+/* ======================================================= */
+
+/* 3. Componentes Modales */
+@import url(/styles/components/style-modal-base.css);
+
+@import url(/styles/components/style-modal-common-ctrls.css);
+
+@import url(/styles/components/style-modal-a11y.css);
+@import url(/styles/components/style-modal-voices.css);
+@import url(/styles/components/style-modal-import.css);
+@import url(/styles/components/style-modal-activation.css);

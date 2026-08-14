@@ -1,0 +1,537 @@
+/* --- styles/components/style-modal-common-ctrls.css --- */
+
+/* 🟢 ESTRUCTURA SEMÁNTICA (Común a A11y y Config) */
+.config-section {
+    border: var(--border-width-sm) solid var(--color-border); 
+    border-radius: var(--radius-md);
+
+    padding: var(--spacing-sm) var(--spacing-lg); 
+    margin: var(--spacing-sm) var(--spacing-none); 
+
+    position: relative;
+    overflow: visible; 
+
+    /* 🟢 EL FIX: Anular el 'min-width: min-content' nativo del fieldset */
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Compactamos las secciones de configuración (fieldsets) */
+body[data-safe-mode="true"] .config-section {
+    margin: var(--spacing-px-4) 0 !important;
+    padding: var(--spacing-sm) !important;
+}
+
+.config-section legend { 
+    font-size: var(--font-size-md); 
+    font-weight: bold; 
+    color: var(--color-secondary); 
+    padding: var(--spacing-none) var(--spacing-sm); 
+    margin-left: var(--spacing-sm); 
+
+    /* 🟢 EL FIX: Quitamos display: flex para que WebKit/Blink recorte el borde del fieldset */
+    display: block;
+    box-sizing: border-box;
+}
+
+body[data-safe-mode="true"] .config-section legend {
+    font-size: var(--font-size-sm);
+    margin-left: var(--spacing-xs);
+}
+
+/* 🟢 Alinear el texto y el botón Preview sin usar flexbox */
+.config-section legend > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 🟢 EL FIX: Eliminar el margen nativo del h4 que estiraba la caja exponiendo la línea */
+.config-section legend h4 {
+    margin: 0;
+}
+
+/* 🟢 CÁPSULAS DE AISLAMIENTO (Para evitar CLS al escalar) */
+.control-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(var(--ui-hit-area) * (1 + var(--zoom-md))); 
+    padding: var(--spacing-sm); 
+    box-sizing: border-box;
+}
+
+body[data-safe-mode="true"] .control-wrapper {
+    min-height: calc(var(--ui-hit-area) * (1 + var(--zoom-sm))); 
+    padding: var(--spacing-none);
+}
+/* 🟢 EL FIX: Elimina el padding del contenedor solo cuando tiene un selector de voz */
+body[data-safe-mode="true"] .control-wrapper:has(.voice-selector) {
+    padding-right: var(--spacing-md);
+}
+
+/* 🟢 CHECKBOX AAA PERSONALIZADO */
+.a11y-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-size: var(--font-size-md);
+    color: var(--color-primary);
+    padding: var(--spacing-none);
+}
+
+.checkbox-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    width: var(--size-full);
+    height: var(--size-full);
+    opacity: 0;
+    margin: var(--spacing-none);
+    cursor: pointer;
+    z-index: 2;
+    outline: none; 
+}
+
+/* 3. Desmarcados, sin foco: borde --color-border, fondo transparente (Estado Base) */
+.custom-check {
+    position: relative;
+    width: var(--ui-hit-area);
+    height: var(--ui-hit-area);
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+    z-index: 1;
+}
+
+/* 4. Desmarcados, con foco: borde --color-accent, fondo transparente */
+input[type="checkbox"]:hover + .custom-check {
+    outline: none;
+    border-color: var(--color-accent);
+    background-color: transparent; /* Aseguramos que siga transparente */
+}
+input[type="checkbox"]:focus + .custom-check,
+input[type="checkbox"]:focus-visible + .custom-check {
+    outline: none;
+    transform: scale(var(--scale-focus-md));
+    border-color: var(--color-accent);
+    border-width: var(--border-width-focus);
+    background-color: transparent; /* Aseguramos que siga transparente */
+}
+
+/* 1. Marcados, sin foco: borde --color-border, fondo --color-primary */
+input[type="checkbox"]:checked + .custom-check {
+    background-color: var(--color-primary);
+    border-color: var(--color-border);
+    border-width: var(--border-width-idle);
+}
+
+/* 2. Marcado, con foco: borde --color-primary, fondo --color-accent */
+input[type="checkbox"]:checked:hover + .custom-check {
+    background-color: var(--color-accent);
+    border-color: var(--color-primary);
+}
+input[type="checkbox"]:checked:focus + .custom-check,
+input[type="checkbox"]:checked:focus-visible + .custom-check {
+    background-color: var(--color-accent);
+    border-color: var(--color-primary);
+    border-width: var(--border-width-focus);
+}
+
+/* Aspa dibujada con porcentajes y posicionamiento centrado */
+.custom-check::after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    left: 50%; 
+    top: 40%;
+    width: 25%; 
+    height: 50%;
+
+    border: solid var(--color-background);
+    border-width: 0 var(--border-width-focus) var(--border-width-focus) 0;
+
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+input[type="checkbox"]:checked + .custom-check::after {
+    display: block;
+}
+
+/* SLIDERS */
+.slider-wrapper { 
+    flex: 1; /* 🟢 El slider se estira todo lo posible entre los iconos */
+    min-width: 0;
+}
+
+/* 1. Base para Sliders convencionales */
+.slider-control {
+    display: flex;
+    flex-wrap: wrap; /* 🟢 Permite la doble fila: Textos arriba, Control abajo */
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--spacing-xs);
+    width: 100%;
+
+    margin: var(--spacing-sm) var(--spacing-none);
+    padding: var(--spacing-xs) var(--spacing-sm); 
+
+    border-top: var(--border-width-sm) solid var(--color-border-placeholder);
+}
+
+body[data-safe-mode="true"] .slider-control {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: var(--spacing-xs) 0;
+}
+
+.control-header {
+    /* 🟢 EL FIX: Forzamos el ancho total para que justify-content opere */
+    width: var(--size-full) !important;
+    flex: 1 1 100%; 
+    display: flex;
+    /* 🟢 Separa label (izquierda) y span (derecha) */
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.setting-label { 
+    flex: 1 1 auto; 
+    text-align: left; 
+    letter-spacing: var(--main-letter-spacing);
+    /* Evitamos que el texto largo del label pise al valor */
+    padding-right: var(--spacing-sm);
+
+    word-break: break-word;
+    hyphens: auto;
+}
+
+body[data-safe-mode="true"] .setting-label {
+    flex: 1 1 auto;
+    font-size: var(--font-size-sm);
+}
+
+.slider-value { 
+    flex: 0 0 auto; 
+    text-align: right; 
+    font-weight: bold; 
+
+    min-width: var(--modal-ally-value-min-width);
+    /* 🟢 EL TRUCO MAESTRO: margin-left: auto garantiza que, al saltar
+       de línea, el elemento se mantenga pegado al borde derecho. */
+    margin-left: auto;
+}
+
+/* 🟢 INPUT RANGE BASE */
+input[type="range"] {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: var(--size-full); 
+    background-color: transparent; 
+    outline: none; 
+    height: var(--ui-hit-area); 
+    cursor: pointer; 
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: var(--size-full); 
+    height: var(--border-width-focus); 
+
+    background-color: var(--color-border); 
+    border-radius: var(--radius-sm);
+}
+input[type="range"]:focus::-webkit-slider-runnable-track,
+input[type="range"]:focus-visible::-webkit-slider-runnable-track {
+    background-color: var(--color-accent); 
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+
+    height: var(--ui-hit-area); 
+    width: var(--ui-hit-area);
+    margin-top: calc((var(--border-width-focus) - var(--ui-hit-area)) / 2); 
+
+    background-color: var(--color-primary);
+    
+    border: var(--border-width-idle) solid transparent;
+    border-radius: var(--radius-circle);
+
+    transition: 
+        transform var(--transition-fast), 
+        background-color var(--transition-fast);
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: var(--color-accent);
+}
+input[type="range"]:focus::-webkit-slider-thumb,
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+    transform: scale(var(--scale-focus-md)); 
+    background-color: var(--color-accent);
+    border: var(--border-width-focus) solid var(--color-accent);
+}
+
+/* 🟢 ICONOS: Evitamos que se aplasten y salten de línea */
+.range-icon-small,
+.range-icon-large {
+    white-space: nowrap; /* Impide que "T T" se rompa en dos líneas */
+    flex-shrink: 0;      /* Impide que el slider reduzca su tamaño */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.range-icon-small { 
+    font-size: var(--font-size-md); 
+}
+.range-icon-large { 
+    font-size: var(--font-size-xl); 
+    font-weight: bold; 
+}
+
+/* 3. 🟢 EL STEPPER (Solo visible en Safe Mode) */
+.btn-stepper {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    min-width: max(32px, var(--ui-hit-area));
+    min-height: max(32px, var(--ui-hit-area));
+
+    aspect-ratio: 1 / 1 !important;
+    width: auto;
+    height: auto;
+    background-color: var(--color-surface);
+
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    color: var(--color-primary);
+    font-size: var(--font-size-xl);
+    line-height: 1;
+    
+    cursor: pointer;
+
+    padding: var(--spacing-xxs);
+
+    flex-shrink: 0;
+}
+/* 🟢 EL FIX: Estado visual inactivo semántico */
+.btn-stepper[aria-disabled="true"] {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+}
+.btn-stepper:focus,
+.btn-stepper:focus-visible,
+.btn-stepper:hover {
+    border-color: var(--color-accent);
+
+    outline: none;
+}
+/* Evitamos que haga el efecto "hover" si está deshabilitado */
+.btn-stepper[aria-disabled="true"]:hover {
+    border-color: var(--color-border);
+}
+.btn-stepper:focus,
+.btn-stepper:focus-visible {
+    border-width: var(--border-width-focus);
+    color: var(--color-accent);
+    transform: translateY(calc(-1 * var(--spacing-sm))); 
+}
+/* Pero mantenemos la caja de foco AAA si navega hasta él con el teclado */
+.btn-stepper[aria-disabled="true"]:focus,
+.btn-stepper[aria-disabled="true"]:focus-visible {
+    border-color: var(--color-border);
+    color: var(--color-primary);
+    transform: none; /* No salta ni escala */
+    outline: var(--border-width-idle) solid var(--color-accent);
+    outline-offset: var(--outline-offset-button);
+}
+
+.stepper-display-value {
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+/* 2. 🟢 CONTROL DE VISIBILIDAD (Slider vs Stepper) */
+.stepper-wrap { display: none; } /* Oculto en Desktop/Mobile */
+
+body[data-safe-mode="true"] .stepper-wrap {
+    display: flex !important; /* Activamos botones de paso */
+    flex: 1 1 100%;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    flex-wrap: nowrap;
+}
+
+.slider-track-group {
+    flex: 1 1 var(--size-full);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+}
+/* 2. 🟢 COMPORTAMIENTO SAFE MODE (Zoom 400%) */
+body[data-safe-mode="true"] .slider-track-group {
+    /* Ocultamos la barra física y los iconos decorativos */
+    display: none !important;
+}
+
+body[data-safe-mode="true"] .slider-value {
+    display: none !important; /* En Safe Mode el valor va dentro del stepper */
+}
+
+/* 🟢 DROPDOWNS (Copia exacta del estilo del Header) */
+.voice-selector {
+    width: var(--size-full);
+    min-height: var(--ui-hit-area);
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    padding: 0 var(--spacing-sm);
+    font-size: var(--font-size-md);
+    transition: all var(--transition-fast);
+    outline: none;
+    cursor: pointer;
+
+    /* 🟢 EL FIX: Truncado de texto (Ellipsis) para opciones extra largas */
+    min-width: 0; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.voice-selector:hover {
+    border-color: var(--color-accent);
+}
+
+.voice-selector:focus,
+.voice-selector:focus-visible {
+    border-width: var(--border-width-focus);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    z-index: 2;
+}
+body:not([data-safe-mode="true"]) .voice-selector:focus,
+body:not([data-safe-mode="true"]) .voice-selector:focus-visible {
+    transform: scale(calc(1 + var(--zoom-md) / 2), var(--scale-focus-md));
+}
+body[data-safe-mode="true"] .voice-selector:focus,
+body[data-safe-mode="true"] .voice-selector:focus-visible {
+    transform: scale(var(--scale-focus-sm));
+}
+
+/* --- ESTILOS DE FOCO PARA LOS NODOS DE AYUDA --- */
+
+.help-view .config-section:focus,
+.help-view .config-section:focus-visible {
+    outline: var(--border-width-idle) dashed var(--color-accent);
+    outline-offset: var(--outline-offset-section);
+    border-radius: var(--radius-md);
+
+    /* Aseguramos que el borde gris original no cambie ni mute */
+    border-color: var(--color-border) !important;
+    
+    /* Eliminamos la sombra que generaba la línea continua indeseada */
+    box-shadow: none !important;
+}
+
+.help-view {
+    margin-bottom: var(--spacing-px-20);
+    padding: var(--spacing-px-2); /* Pequeño respiro extra por si el diseño es muy ajustado */
+}
+.help-view:focus,
+.help-view:focus-visible {
+    /* Mismo aspecto AAA que los fieldsets */
+    outline: var(--border-width-idle) dashed var(--color-accent) !important;
+    border-radius: var(--radius-md);
+    
+    outline-offset: var(--outline-offset-section);
+}
+
+.help-node {
+    /* Preparamos las esquinas redondeadas */
+    border-radius: var(--radius-sm);
+    
+    /* Estado de reposo: borde transparente para que la transición sea suave */
+    outline: var(--border-width-idle) dotted transparent;
+    outline-offset: 0px;
+    
+    transition: 
+        outline-offset var(--transition-fast), 
+        outline-color var(--transition-fast);
+
+    /* Clona el padding, borde y outline en cada línea del elemento en línea */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    /* 🟢 ZOOM 400%: Prevención de desbordamiento horizontal */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* ========================================================= */
+/* 🟢 FIX FIREFOX (Gecko) - Reglas aisladas                  */
+/* ========================================================= */
+
+/* Pista (Track) en Firefox */
+input[type="range"]::-moz-range-track {
+    width: var(--size-full); 
+    height: var(--border-width-focus); 
+
+    background-color: var(--color-border); 
+    border-radius: var(--radius-sm);
+}
+
+input[type="range"]:focus::-moz-range-track,
+input[type="range"]:focus-visible::-moz-range-track {
+    background-color: var(--color-accent); 
+}
+
+/* Bolita (Thumb) en Firefox */
+input[type="range"]::-moz-range-thumb {
+    appearance: none;
+
+    height: var(--ui-hit-area); 
+    width: var(--ui-hit-area);
+    
+    /* ⚠️ IMPORTANTE: En Firefox NO se usa margin-top porque 
+       el motor ya centra el thumb sobre el track nativamente. */
+
+    background-color: var(--color-primary);
+
+    /* Firefox añade un borde gris por defecto a los thumbs, lo machacamos aquí */
+    border: var(--border-width-idle) solid transparent;
+    border-radius: var(--radius-circle);
+
+    transition: 
+        transform var(--transition-fast), 
+        background-color var(--transition-fast);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+    background-color: var(--color-accent);
+}
+
+input[type="range"]:focus::-moz-range-thumb,
+input[type="range"]:focus-visible::-moz-range-thumb {
+    transform: scale(var(--scale-focus-md)); 
+    background-color: var(--color-accent);
+    border: var(--border-width-focus) solid var(--color-accent);
+}
+
+/* --- styles/components/style-modal-common-ctrls.css --- */

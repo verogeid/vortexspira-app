@@ -1,0 +1,351 @@
+/* --- styles/components/style-modal-base.css --- */
+
+.modal-menu {
+    display: none; 
+    position: fixed; 
+    z-index: var(--z-index-modal);
+    left: var(--spacing-none); 
+    top: var(--spacing-none); 
+    width: var(--size-full); 
+    height: var(--size-full);
+
+    background-color: var(--overlay-bg-color);
+    align-items: center; 
+    justify-content: center; 
+    padding: var(--spacing-md);
+}
+
+body[data-safe-mode="true"] .modal-menu {
+    padding: var(--spacing-xs);
+}
+
+/* --- ESTRUCTURA MASTER MODAL --- */
+.master-modal-wrapper {
+    position: relative; 
+    width: var(--size-full); 
+    max-width: var(--master-modal-max-width); 
+    height: var(--master-modal-height); 
+    max-height: var(--modal-max-height);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 🚨 AJUSTE SAFE MODE: Compactación extrema */
+body[data-safe-mode="true"] .master-modal-wrapper {
+    --master-modal-max-width: var(--master-modal-max-width-safe);
+    --master-modal-height: var(--master-modal-height-safe);
+    --modal-max-height: var(--modal-max-height-safe);
+    margin: 0 !important;
+}
+
+.master-layout {
+    display: flex;
+    flex-direction: row;
+    width: var(--size-full);
+    height: var(--size-full);
+    background-color: var(--color-surface);
+
+    border: var(--border-width-sm) dotted var(--color-border);
+    
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg) var(--shadow-color-dark);
+    overflow: hidden;
+}
+
+body[data-layout="mobile"] .master-layout { flex-direction: column; }
+
+.modal-nav {
+    width: var(--master-modal-nav-width);
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md) var(--spacing-none);
+    flex-shrink: 0;
+
+    /* 🟢 FIX AAA: Aislamos el scroll de las pestañas.
+       Ahora, al tabular, solo esta columna se moverá, protegiendo el layout maestro. */
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* Ocultamos la barra de scroll nativa para no romper los 60px de ancho */
+    scrollbar-width: none; /* Firefox */
+}
+
+body[data-layout="mobile"] .modal-nav {
+    width: var(--size-full);
+    flex-direction: row;
+
+    border: none;
+    padding: var(--spacing-xxs) var(--spacing-xxs);
+    
+    /* 🟢 FIX AAA Mobile: Mantenemos el scroll horizontal y bloqueamos el vertical */
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+    /* Alineamos el contenido normalmente */
+    align-items: center; 
+}
+
+/* 🟢 PROTECCIÓN: El Safe Mode NO debe encoger la navegación */
+body[data-safe-mode="true"] .modal-nav {
+    height: calc(var(--ui-hit-area) + var(--spacing-xxs)) !important;
+    min-height: var(--ui-hit-area) !important;
+    padding: var(--spacing-none) !important;
+    gap: var(--spacing-xxs) !important;
+    
+    /* Scroll invisible pero funcional */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    
+    /* 🟢 MÁSCARA INTELIGENTE:
+       1. Desvanece el inicio (0 a 20px).
+       2. Sólido en el centro.
+       3. Desvanece las pestañas ANTES del botón (End - 64px a End - 44px).
+       4. Vuelve a SÓLIDO para el botón sticky (End - 44px a 100%). */
+    -webkit-mask-image: linear-gradient(
+        to right, 
+        transparent, 
+        black var(--spacing-px-20), 
+        black calc(100% - (var(--ui-hit-area) + var(--spacing-px-20))), 
+        transparent calc(100% - var(--ui-hit-area)), 
+        black calc(100% - var(--ui-hit-area))
+    );
+    mask-image: linear-gradient(
+        to right, 
+        transparent, 
+        black var(--spacing-px-20), 
+        black calc(100% - (var(--ui-hit-area) + var(--spacing-px-20))), 
+        transparent calc(100% - var(--ui-hit-area)), 
+        black calc(100% - var(--ui-hit-area))
+    );
+}
+
+/* Ocultar barra en Chrome/Safari/Edge */
+.modal-nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* 🟢 EL FIX: Contenedor Semántico para Tablist (Imita el comportamiento de la barra nav original) */
+.modal-tablist {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    gap: var(--spacing-none);
+}
+
+body[data-layout="mobile"] .modal-tablist {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+body[data-safe-mode="true"] .modal-tablist {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.tab-btn {
+    background: transparent;
+    border: var(--border-width-none);
+    border-radius: var(--radius-xl);
+
+    color: var(--color-secondary);
+    padding: var(--spacing-xxs) var(--spacing-xxs);
+
+    text-align: left;
+    font-size: var(--font-size-md);
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    outline: none;
+}
+.tab-btn .icon-svg {
+    background-color: var(--color-primary);
+}
+
+body[data-layout="mobile"] .tab-btn {
+    box-sizing: border-box;
+
+    padding: var(--spacing-xxs) var(--spacing-xxs);
+
+    transform: translate(0);
+
+    /* 🟢 FIX AAA: Prohíbe que el botón se aplaste o parta el texto en 2 líneas. 
+        Fuerza a que el contenedor 'modal-nav' active su scroll. */
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+body[data-safe-mode="true"] .tab-btn {
+    height: var(--size-full) !important;
+    min-width: var(--ui-hit-area) !important;
+    padding: var(--spacing-none) var(--spacing-xxs) !important;
+    margin-bottom: var(--spacing-none) !important;
+    transform: none !important;
+
+    border-radius: var(--radius-circle) !important;
+}
+
+/* 🟢 ENVOLTORIO OPACO DEL BOTÓN CERRAR */
+.modal-nav .close-btn-wrapper {
+    margin-top: auto; /* Desktop: lo empuja al final de la columna */
+    display: flex;
+}
+body[data-layout="mobile"] .modal-nav .close-btn-wrapper {
+    margin-left: auto; /* Móvil: lo empuja al final de la fila */
+}
+/* Reducción de la zona de cierre para no colapsar con las pestañas */
+body[data-safe-mode="true"] .modal-nav .close-btn-wrapper {
+    position: sticky;
+    right: 0;
+    min-width: var(--ui-hit-area);
+    background-color: var(--color-background); /* 🟢 Cuadrado perfecto y opaco */
+    z-index: 10;
+    
+    /* Centramos el botón internamente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-nav .close-btn {
+    color: var(--color-danger);
+}
+
+/* Reducción de la zona de cierre para no colapsar con las pestañas */
+body[data-safe-mode="true"] .modal-nav .close-btn {
+    background-color: transparent !important; /* Opaco */
+}
+
+/* 🟢 FIX AAA 1: Protegemos el hover del "Sticky Hover" táctil */
+body:not([data-terminal="touch"]) .tab-btn:hover {
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+}
+
+.tab-btn.active {
+    border-bottom: none;
+    border-right: none;
+    border: var(--border-width-lg) solid var(--color-primary);
+
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+}
+.tab-btn:not(.active) .icon-svg {
+    background-color: var(--color-primary);
+}
+.tab-btn.active:focus,
+.tab-btn.active:focus-visible {
+    border: var(--border-width-lg) solid var(--color-accent);
+}
+.tab-btn.active:focus .icon-svg,
+.tab-btn.active:focus-visible .icon-svg {
+    background-color: var(--color-accent);
+}
+
+body:not([data-layout="mobile"]) .tab-btn:not(.active):focus,
+body:not([data-layout="mobile"]) .tab-btn:not(.active):focus-visible {
+    border: none;
+    border-right: var(--border-width-lg) solid var(--color-accent);
+}
+body[data-layout="mobile"] .tab-btn:not(.active):focus,
+body[data-layout="mobile"] .tab-btn:not(.active):focus-visible {
+    border: none;
+    border-bottom: var(--border-width-lg) solid var(--color-accent);
+}
+
+body:not([data-layout="mobile"]) .tab-btn:focus,
+body:not([data-layout="mobile"]) .tab-btn:focus-visible,
+body:not([data-layout="mobile"]) .tab-btn.active {
+    transform: translateX(calc(-1 * var(--spacing-sm))); 
+}
+/* 🟢 FIX AAA 2: Solo permitimos el desplazamiento de la clase .active */
+/* 🟢 INDICADOR DE FOCO AAA: Línea horizontal (No solo color) */
+body[data-layout="mobile"]:not([data-safe-mode="true"]) .tab-btn:focus,
+body[data-layout="mobile"]:not([data-safe-mode="true"]) .tab-btn:focus-visible,
+body[data-layout="mobile"]:not([data-safe-mode="true"]) .tab-btn.active {
+    transform: translateY(calc(-1 * var(--spacing-sm))); 
+}
+
+/* 🟢 INDICADOR DE FOCO AAA: Línea horizontal (No solo color) */
+body[data-safe-mode="true"] .tab-btn:focus,
+body[data-safe-mode="true"] .tab-btn:focus-visible,
+body[data-safe-mode="true"] .tab-btn.active {
+    outline: none;
+    transform: none !important;
+}
+
+.tab-btn.close-btn:hover,
+.tab-btn.close-btn:focus,
+.tab-btn.close-btn:focus-visible,
+.tab-btn.close-btn.active {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+
+body[data-safe-mode="true"] .tab-btn.close-btn.active {
+    color: var(--color-danger);
+    background-color: var(--color-surface) !important;
+    border-bottom: var(--border-width-focus-indicator) solid var(--color-danger) !important;
+    outline: none;
+    transform: none !important;
+}
+
+body[data-safe-mode="true"] .tab-btn.close-btn:hover,
+body[data-safe-mode="true"] .tab-btn.close-btn:focus,
+body[data-safe-mode="true"] .tab-btn.close-btn:focus-visible {
+    color: var(--color-danger);
+    background-color: var(--color-surface) !important;
+    border-bottom: var(--border-width-focus-indicator) solid var(--color-danger) !important;
+    outline: none;
+    transform: none !important;
+}
+
+.modal-content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: var(--spacing-lg);
+    position: relative;
+    background-color: var(--color-surface);
+
+    /* 🟢 FIX: Aseguramos que los hijos directos (las vistas) se estiren */
+    align-items: stretch;
+}
+    
+/* 📱 AJUSTE MÓVIL: Reducimos padding lateral del contenido */
+body[data-layout="mobile"] .modal-content-area {
+    padding: var(--spacing-md);
+}
+
+/* Espacio para scroll lateral (aire para el usuario) */
+body[data-safe-mode="true"] .modal-content-area {
+    padding: var(--spacing-sm);
+    padding-right: var(--spacing-md);
+}
+
+.modal-view {
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    flex-grow: 1;
+    width: var(--size-full);
+}
+/* 🟢 La clase active ahora otorga el poder de Flexbox */
+.modal-view.active {
+    display: flex !important; 
+}
+
+/* 🟢 UNIFICACIÓN DE HEADERS: Todos los h3 de modales empiezan igual */
+.modal-view-header h3 {
+    margin: var(--spacing-none);
+    padding: var(--spacing-none);
+    line-height: var(--main-line-height);
+}
+
+/* --- styles/components/style-modal-base.css --- */

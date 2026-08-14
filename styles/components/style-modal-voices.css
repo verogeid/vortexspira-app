@@ -1,0 +1,155 @@
+/* --- styles/components/style-modal-visual.css --- */
+
+#voice-options-container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: var(--spacing-md); 
+    align-items: stretch;
+
+    box-sizing: border-box;
+}
+
+body[data-safe-mode="true"] #voice-options-container {
+    gap: var(--spacing-sm);
+}
+
+/* 🟢 FIX AAA: Cada tarjeta se convierte en un ítem flexible de la cuadrícula,
+   permitiendo un salto de línea natural y orden de tabulación lineal (Z-Pattern) */
+#voice-options-container .config-section { 
+    flex: 1 1 var(--visual-col-min-width); 
+    margin: var(--spacing-none); 
+    box-sizing: border-box;
+}
+
+/* 🟢 DESKTOP: Hasta 3 por línea */
+body[data-layout="desktop"] #voice-options-container .config-section {
+    flex: 1 1 calc(33.333% - var(--spacing-md));
+    min-width: var(--visual-col-min-width);
+}
+
+/* 🟢 MOBILE: Hasta 2 por línea */
+body[data-layout="mobile"] #voice-options-container .config-section {
+    flex: 1 1 calc(50% - var(--spacing-md));
+    min-width: var(--card-min-width);
+}
+
+/* 🟢 SAFE MODE: 2 por línea (Prioridad absoluta) */
+body[data-safe-mode="true"] #voice-options-container .config-section {
+    flex: 1 1 100%;
+    margin: var(--spacing-sm) 0 !important;
+}
+
+.character-description {
+    display: block !important;
+    margin: var(--spacing-sm) 0 var(--spacing-md) 0 !important;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-md);
+    line-height: var(--main-line-height);
+    color: var(--color-secondary);
+}
+
+.pitch-warning-block { 
+    display: flex; 
+    align-items: center; 
+    gap: var(--spacing-em-05); 
+
+    /* 🟢 FIX VISUAL: Alineamos el texto con el padding de los contenedores 
+       y le damos margen inferior para separarlo de las tarjetas de voces */
+    padding: var(--spacing-none) var(--spacing-none);
+    margin-bottom: var(--spacing-sm);
+}
+
+body[data-safe-mode="true"] .pitch-warning-block {
+    margin-bottom: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    border: var(--border-width-sm) solid var(--color-border-placeholder);
+    border-radius: var(--radius-sm);
+}
+
+.pitch-warning { 
+    font-size: var(--font-size-md); 
+    color: var(--color-secondary); 
+    line-height: var(--ui-hit-area);
+}
+
+/* FIX: Mantenemos tamaño de fuente en el aviso */
+body[data-safe-mode="true"] .pitch-warning {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--main-line-height);
+    display: block;
+}
+
+/* SLIDER VALUE */
+#voice-options-container .slider-value {
+    min-width: var(--modal-visual-value-min-width);
+}
+#voice-options-container .display-value {
+    min-width: var(--modal-visual-value-min-width);
+}
+
+/* ⏯️ BOTON PREVIEW */
+
+/* Botón absoluto en la esquina del fieldset */
+.voice-header-btn-wrapper {
+    position: absolute;
+    right: var(--spacing-sm);
+    
+    /* El top 0 de un fieldset empieza debajo del padding del legend.
+       Lo empujamos hacia arriba para que coincida exactamente con la línea del borde */
+    top: 0;
+    margin-top: calc(-1 * var(--spacing-sm));
+    transform: translateY(-50%);
+    
+    /* Aseguramos que se posicione por encima de la línea del fieldset */
+    z-index: 2; 
+}
+
+/* 🟢 Redimensionamos suavemente el botón para que encaje en el Legend */
+.preview-voice-btn {
+    flex-shrink: 0;
+    width: var(--ui-hit-area);
+    aspect-ratio: 1 / 1 !important;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 🟢 EL FIX: Fondo sólido para tapar la línea del borde inferior */
+    background-color: var(--color-surface);
+
+    border: var(--border-width-idle) solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 0;
+    transition: 
+        transform var(--transition-fast), 
+        border-color var(--transition-fast);
+    outline: none;
+}
+
+.preview-voice-btn .icon-svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Foco y Hover AAA */
+.preview-voice-btn:hover {
+    border-color: var(--color-accent);
+}
+
+.preview-voice-btn:focus,
+.preview-voice-btn:focus-visible {
+    border-width: var(--border-width-focus);
+    border-color: var(--color-accent);
+    transform: translateY(calc(-1 * var(--spacing-px-4)));
+}
+
+.preview-voice-btn:focus .icon-svg,
+.preview-voice-btn:focus-visible .icon-svg {
+    background-color: var(--color-accent);
+}
+
+.mode-story-badge {
+    color: var(--color-highlight);
+}
+/* --- styles/components/style-modal-visual.css --- */
