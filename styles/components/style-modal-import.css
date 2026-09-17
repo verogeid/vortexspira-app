@@ -1,0 +1,87 @@
+/* --- styles/components/style-modal-import.css --- */
+
+#view-import { 
+    text-align: left; 
+}
+
+#view-import .modal-view-header { 
+    margin-bottom: var(--spacing-md); 
+    flex-shrink: 0; /* El título no se encoge nunca */
+}
+
+#view-import .modal-view-header h3 {
+    text-align: left;
+}
+
+#view-import .drag-drop-zone {
+    /* 🟢 LÓGICA DE CRECIMIENTO: 
+       flex: 1 hace que ocupe TODO el espacio disponible sin pasarse.
+       height: auto permite que crezca si el contenido (fuente 200%) es muy grande. */
+    flex: 1 1 auto;
+    margin: var(--spacing-none);
+
+    min-height: var(--import-drag-min-height);
+    padding: var(--spacing-md);
+
+    border: var(--border-width-lg) dashed var(--color-input-border);
+    border-radius: var(--radius-lg); 
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+
+    transition: 
+        background-color var(--transition-fast), 
+        border-color var(--transition-fast);
+    
+    gap: var(--spacing-sm); 
+}
+
+/* En Safe Mode somos aún más compactos con el área punteada */
+body[data-safe-mode="true"] #view-import .drag-drop-zone {
+    padding: var(--spacing-sm);
+    min-height: var(--import-drag-min-height-safe);
+}
+
+#view-import .drag-drop-zone.drag-over { 
+    background-color: var(--color-drag-drop-zone-hover-bg, rgba(0,0,0,0.05)); 
+    border-color: var(--color-accent); 
+}
+
+/* Textos e instrucciones INTERNAS de la zona de drop centrados */
+#view-import .drag-drop-zone p,
+#view-import .drag-drop-zone .drag-drop-text {
+    text-align: center !important;
+    margin: var(--spacing-none);
+    line-height: var(--main-line-height);
+}
+
+#view-import #folder-selector-btn {
+    padding: var(--spacing-px-10) var(--spacing-px-20);
+
+    background-color: transparent; 
+    border: var(--border-width-md) solid var(--color-input-border);
+    border-radius: var(--radius-md);
+
+    color: var(--color-primary); 
+    font-size: var(--font-size-lg); 
+    font-weight: bold;
+    
+    cursor: pointer;
+    transition: 
+        border-color var(--transition-fast), 
+        box-shadow var(--transition-fast), 
+        color var(--transition-fast);
+    outline: none;
+}
+
+#view-import #folder-selector-btn:hover, 
+#view-import #folder-selector-btn:focus {
+    border-color: var(--color-accent); 
+    box-shadow: var(--shadow-md) var(--color-interact-hover-shadow); 
+    color: var(--color-accent);
+}
+
+/* --- styles/components/style-modal-import.css --- */

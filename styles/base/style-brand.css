@@ -1,0 +1,222 @@
+/* --- styles/base/style-brand.css --- */
+
+.brand-master {
+    background-color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-brand);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ui-hit-area);
+    height: var(--ui-hit-area);
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+    outline: none;
+}
+
+.brand-link:focus, 
+.brand-link:focus-visible {
+    transform: scale(var(--scale-focus-md));
+    outline: var(--border-width-focus) solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: var(--radius-md);
+}
+
+.brand-link:focus .icon-brand-vortex::after, 
+.brand-link:hover .icon-brand-vortex::after, 
+.brand-link:focus .icon-brand-partner::after,
+.brand-link:hover .icon-brand-partner::after {
+    background-color: var(--color-accent) !important;
+}
+
+.brand-placeholder {
+    width: var(--ui-hit-area);
+    height: var(--ui-hit-area);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-titles { display: flex; align-items: center; justify-content: center; }
+
+/* --- LOGOS DINÁMICOS --- */
+.icon-brand-vortex, 
+.icon-brand-partner {
+    display: inline-block; 
+    position: relative;
+    width: var(--ui-hit-area); height: var(--ui-hit-area);
+}
+
+.icon-brand-vortex::before, .icon-brand-vortex::after,
+.icon-brand-partner::before, .icon-brand-partner::after {
+    content: ''; position: absolute; top: 0; left: 0; 
+    width: 100%; height: 100%;
+    -webkit-mask-size: contain; mask-size: contain;
+    mask-repeat: no-repeat; mask-position: center;
+    transition: background-color var(--transition-fast);
+}
+
+.icon-brand-vortex::before {
+    -webkit-mask-image: var(--logo-base-static); mask-image: var(--logo-base-static);
+    background-color: var(--color-logo-static);
+}
+
+.icon-brand-vortex::after {
+    -webkit-mask-image: var(--logo-base-dynamic); mask-image: var(--logo-base-dynamic);
+    background-color: var(--color-logo-dynamic);
+}
+
+.icon-brand-partner::before {
+    background-color: var(--color-logo-static);
+}
+.icon-brand-partner::after {
+    background-color: var(--color-logo-dynamic);
+}
+
+/* 4. Definición Específica: TESTEANDOYA */
+.icon-brand-testeandoya::before {
+    -webkit-mask-image: var(--logo-ty-static); 
+    mask-image: var(--logo-ty-static);
+}
+
+.icon-brand-testeandoya::after {
+    -webkit-mask-image: var(--logo-ty-dynamic); 
+    mask-image: var(--logo-ty-dynamic);
+}
+
+/* Definición para Partners alternativos */
+.logo-partner::before {
+    -webkit-mask-image: var(--logo-partner); 
+    mask-image: var(--logo-partner);
+}
+
+.logo-partner::after {
+    -webkit-mask-image: var(--logo-partner); 
+    mask-image: var(--logo-partner);
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN (Lógica Híbrida: Ancho y Alto)
+   ======================================================== */
+
+/* ========================================================
+   🖥️ MODO DESKTOP
+   ======================================================== */
+body[data-layout="desktop"][data-safe-mode="false"] .brand-master {
+    position: fixed; /* 🟢 Se sale del flujo flex y cae a la izquierda */
+    left: 0; 
+    top: 0; 
+    bottom: 0; /* Obliga a ocupar toda la altura */
+    width: var(--desktop-brand-width);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200;
+}
+    
+body[data-layout="desktop"][data-safe-mode="false"] .brand-content {
+    display: flex; flex-direction: row; align-items: center;
+    gap: var(--spacing-lg); transform: rotate(-90deg); white-space: nowrap;
+}
+    
+body[data-layout="desktop"][data-safe-mode="false"] .title-horizontal { display: none; }
+    
+body[data-layout="desktop"][data-safe-mode="false"] .title-vertical {
+    display: block;
+    font-weight: bold;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--main-letter-spacing);
+}
+
+/* ========================================================
+   📱 MODO MÓVIL o MODO EMERGENCIA
+   ======================================================== */
+body[data-layout="mobile"] .brand-master,
+body[data-safe-mode="true"] .brand-master {
+    position: relative; /* 🟢 Vuelve al flujo normal dentro de la caja de scroll */
+    width: 100%;
+    height: auto;
+    border-right: none;
+}
+    
+body[data-layout="mobile"] .brand-content,
+body[data-safe-mode="true"] .brand-content {
+    display: flex; flex-direction: row; align-items: center; justify-content: space-between;
+    width: 100%; padding: var(--spacing-sm) var(--spacing-md);
+    transform: none; /* 🟢 Sin rotación */
+}
+    
+body[data-layout="mobile"] .title-vertical,
+body[data-safe-mode="true"] .title-vertical { display: none; }
+    
+body[data-layout="mobile"] .title-horizontal,
+body[data-safe-mode="true"] .title-horizontal {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; flex-grow: 1; padding: 0 var(--spacing-sm);
+}
+    
+body[data-layout="mobile"] .app-name,
+body[data-safe-mode="true"] .app-name {
+    font-size: var(--font-size-xs);
+    font-weight: bold; color: var(--color-secondary);
+    text-transform: uppercase; 
+    letter-spacing: var(--main-letter-spacing); 
+    line-height: var(--main-line-height);
+}
+    
+body[data-layout="mobile"] .course-name,
+body[data-safe-mode="true"] .course-name {
+    font-size: var(--font-size-sm);
+    font-weight: bold; color: var(--color-primary);
+    line-height: 1.2; display: -webkit-box;
+    -webkit-line-clamp: 2; line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+}
+
+body[data-safe-mode="true"] .brand-master {
+    /* Reducimos el grosor físico de la barra al mínimo del área táctil */
+    padding: 0 !important; /* 🟢 Mínimo vertical */
+}
+
+body[data-safe-mode="true"] .brand-content {
+    /* Ajustamos el padding lateral para que los logos no toquen el borde */
+    padding: 0 var(--spacing-sm) !important;
+}
+
+/* 🟢 SACRIFICIO DE MARCA: Ocultamos el nombre de la app (VortexSpira EdTech)
+    pero NO usamos display:none para que el DOM se mantenga coherente. */
+body[data-safe-mode="true"] .brand-master .app-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* 🟢 LOGOS ESTÁTICOS: Eliminamos el scale para evitar saltos visuales 
+    en una ventana tan pequeña. Solo color. */
+body[data-safe-mode="true"] .brand-link:focus, 
+body[data-safe-mode="true"] .brand-link:focus-visible, 
+body[data-safe-mode="true"] .brand-link:hover {
+    transform: none !important;
+    outline-offset: var(--spacing-px-2) !important; /* Ajustamos el foco para que no desborde */
+}
+
+body[data-safe-mode="true"] .course-name {
+    /* Forzamos que el nombre del curso sea el protagonista */
+    font-size: var(--font-size-sm) !important;
+    max-width: 60dvw; /* Evitamos que empuje a los logos */
+}
+
+/* --- styles/base/style-brand.css --- */

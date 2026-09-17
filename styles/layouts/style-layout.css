@@ -1,0 +1,525 @@
+/* --- styles/layouts/style-layout.css --- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { 
+    height: 100%; 
+    margin: 0; padding: 0; 
+    
+    /* 🟢 EL FIX: Forzar contención total del viewport horizontal */
+    width: 100dvw;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%; 
+    background-color: var(--color-background);
+
+    color: var(--color-primary);
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-base);
+    letter-spacing: var(--main-letter-spacing);
+    word-spacing: var(--main-word-spacing);
+    line-height: var(--main-line-height);
+    
+    margin: var(--spacing-none);
+    padding: var(--spacing-none);
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 🟢 SCROLLBARS AAA (Visibles, Contrastados y Accesibles) */
+* {
+    /* Estándar W3C moderno (Firefox) */
+    scrollbar-width: auto; /* NUNCA usar 'thin' en AAA */
+    scrollbar-color: var(--color-border) var(--color-surface);
+}
+
+/* Webkit (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+    /* AAA: Ancho suficiente para interacción motriz (Target Size) */
+    width: var(--spacing-px-14); 
+    height: var(--spacing-px-14);
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--color-surface);
+    border-left: var(--border-width-sm) solid var(--color-border-placeholder);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: var(--radius-lg);
+    
+    /* Crea un falso margen para que no toque los bordes, pero mantiene el hit-area grande */
+    border: var(--border-width-lg) solid var(--color-surface); 
+}
+
+*::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:active {
+    /* Feedback visual inmediato al interactuar */
+    background-color: var(--color-accent); 
+}
+
+/* --- SINCRONIZACIÓN DE MÁRGENES CON INTERLINEADO --- */
+
+p, ul, ol, blockquote, .help-list {
+    margin-top: var(--spacing-none);
+    /* Hacemos que el margen inferior dependa de la variable de interlineado.
+       El multiplicador 0.75em asegura una separación armónica sin crear huecos gigantes. */
+    margin-bottom: calc(var(--spacing-em-08) * var(--main-line-height));
+}
+
+li {
+    /* Igual para los elementos de lista */
+    margin-bottom: calc(var(--spacing-em-02) * var(--main-line-height));
+}
+
+/* Reseteo para el último elemento y que no genere scroll innecesario */
+p:last-child, ul:last-child, .help-list:last-child {
+    margin-bottom: var(--spacing-none);
+}
+
+/* 🟢 EL FIX: Optimización de sangrado para listas */
+.help-list {
+    /* Reducimos el abismo por defecto del navegador a un espacio lógico */
+    padding-left: calc(var(--spacing-em-1) + var(--spacing-em-05));
+}
+.help-node {
+    /* 🟢 GUIONES ORTOGRÁFICOS (Word Hyphenation) */
+    overflow-wrap: break-word; /* Rompe palabras gigantescas si es necesario */
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto; /* Permite guiones de fin de línea automáticos */
+}
+
+body[data-safe-mode="true"] .help-list {
+    /* En Safe Mode, llevamos el espacio al límite matemático absoluto 
+       (solo dejamos el hueco exacto para que se pinte el puntito de la viñeta) */
+    padding-left: calc(var(--spacing-em-1) + calc(var(--spacing-em-02) / 2)) !important;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow: hidden; /* Contenedor maestro inamovible */
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-top: env(safe-area-inset-top);
+}
+
+.scroll-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden; /* Por defecto NO hace scroll, lo delega en main */
+}
+
+.content-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+main {
+    flex: 1 1 auto;
+    overflow-y: auto; /* 🟢 SCROLL ACTIVO EN ESTADO NORMAL */
+    overflow-x: hidden;
+    width: var(--size-full);
+    padding: var(--spacing-lg);
+    max-width: var(--main-max-width);      
+    margin: 0 auto;
+    outline: none;
+}
+
+.header-titles:focus,
+.header-titles:focus-visible {
+    outline: none;
+}
+
+#text { 
+    max-width: var(--main-max-characters); 
+
+    line-height: var(--main-line-height);
+}
+#text p { 
+    margin: var(--spacing-em-1) var(--spacing-none); 
+    line-height: var(--main-line-height);
+
+    /* 🟢 GUIONES ORTOGRÁFICOS (Word Hyphenation) */
+    overflow-wrap: break-word; /* Rompe palabras gigantescas si es necesario */
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto; hyphens: auto; /* Permite guiones de fin de línea automáticos */
+}
+
+.phrase {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+
+    cursor: text;
+}
+
+/* 🟢 SPANS NORMALES COPIABLES (Prosa) */
+.phrase.copyable:not(.code-phrase):not(.active) {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: var(--spacing-em-02);
+    cursor: pointer;
+    transition: text-decoration-color var(--transition-fast);
+}
+
+/* Feedback visual al pasar el ratón para anticipar la acción */
+.phrase.copyable:not(.code-phrase):not(.active):hover {
+    text-decoration-color: var(--color-accent);
+}
+
+/* 🟢 BLOQUES DE CÓDIGO COPIABLES (Icono Visual) */
+p.code-block.copyable-block {
+    position: relative;
+    /* Aseguramos que el icono no pise el texto si el código es muy ancho */
+    padding-right: calc(var(--spacing-md) + 30px); 
+}
+
+p.code-block.copyable-block::before {
+    content: "";
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    
+    width: var(--spacing-px-24); 
+    height: var(--spacing-px-24);
+    background-color: var(--color-primary);
+    
+    /* Reutilizamos tu variable de máscara */
+    -webkit-mask-image: var(--icon-copy); mask-image: var(--icon-copy);
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+    
+    opacity: var(--opacity-disabled);
+    transition: 
+        opacity var(--transition-fast), 
+        background-color var(--transition-fast);
+    
+    /* Vital: que el icono no bloquee el foco ni el click del contenedor real */
+    pointer-events: none; 
+}
+
+p.code-block.copyable-block .phrase:hover {
+    cursor: pointer;
+}
+/* Iluminamos el icono cuando el bloque recibe el highlight, el foco o el hover */
+p.code-block.copyable-block:focus-within::before,
+p.code-block.copyable-block:hover::before {
+    opacity: 1;
+    background-color: var(--color-accent);
+    cursor: none; /* Que no bloquee el foco del bloque */
+}
+
+.code-block, 
+.code-phrase {
+    /* Desactiva los guiones ortográficos por completo */
+    -webkit-hyphens: none;
+    hyphens: none;
+    
+    /* Fuerza el corte en cualquier carácter si no hay espacios disponibles (vital para URLs largas) */
+    word-break: break-all; 
+}
+
+/* 🟢 COMANDOS EN LÍNEA Y ATAJOS DE TECLADO */
+kbd {
+    /* Respetar la tipografía elegida por el usuario */
+    font-family: var(--code-font-family);
+    
+    font-size: var(--font-size-base);
+    
+    /* Un ligero respiro del 10% extra, sin llegar a romper la palabra */
+    letter-spacing: calc(var(--main-letter-spacing) * 1.1);
+    
+    /* Aire interior para que respire */
+    padding: calc(var(--spacing-em-02) / 2) var(--spacing-em-05);
+    margin: var(--spacing-none) calc(var(--spacing-em-02) / 2);
+
+    /* Desactiva los guiones ortográficos */
+    -webkit-hyphens: none; hyphens: none;
+    
+    /* Permite romper cadenas largas si no caben, pero prioriza los espacios si existen */
+    overflow-wrap: anywhere;
+}
+.phrase:not(.active) kbd,
+.phrase:not(.previous-active) kbd,
+.phrase:not(:focus) kbd,
+.phrase:not(:focus-visible) kbd {
+    background-color: var(--color-surface, rgba(0, 0, 0, 0.05));
+    color: var(--color-primary);
+
+    /* Diseño de "tecla" o "chip" en línea */
+    border: var(--border-width-sm) solid var(--color-border-placeholder, #ccc);
+    border-radius: var(--radius-sm);
+}
+
+.phrase.active { 
+    background-color: var(--color-highlight); 
+    color: var(--color-highlight-text, var(--color-primary)); 
+    /* Añadimos una transición para que el cambio de color al recibir foco sea suave */
+    transition: background-color var(--transition-fast);
+}
+.phrase.active kbd { 
+    background-color: transparent; 
+    color: inherit; 
+    /* Añadimos una transición para que el cambio de color al recibir foco sea suave */
+    transition: background-color var(--transition-fast);
+
+    border: none;
+}
+/* 🟢 FIX AAA: Eco visual (rastro) durante pausas silenciosas para TDAH */
+.phrase.previous-active {
+    /* Le damos el color del highlight pero con una opacidad reducida, 
+       o simplemente un contorno, para que no parezca que está siendo leído 
+       en este exacto segundo, pero sirva de ancla visual. */
+    background-color: var(--color-highlight); 
+    color: var(--color-highlight-text, var(--color-primary)); 
+    opacity: var(--opacity-previous-active); /* Suavizamos el impacto */
+    transition: opacity var(--transition-linear) ease-out;
+}
+.phrase.previous-active kbd {
+    background-color: transparent; 
+    color: inherit; 
+    border: none;
+}
+
+/* 🟢 FIX AAA: Refuerzo visual del foco en el área de lectura */
+.phrase:focus {
+    /* Forzamos el color de acento para que destaque sobre el highlight pasivo */
+    background-color: var(--color-accent) !important;
+    color: var(--color-a11y-selected-text, #000) !important;
+    
+    /* Dibujamos el outline con 1px de separación (aire) */
+    outline: var(--border-width-md) solid var(--color-highlight);
+    outline-offset: var(--outline-offset-phrase);
+    
+    border-radius: var(--radius-sm);
+    
+    /* Aseguramos que el outline no quede tapado por frases adyacentes */
+    z-index: 1;
+    position: relative;
+}
+.phrase:focus kbd {
+    /* Forzamos el color de acento para que destaque sobre el highlight pasivo */
+    background-color: transparent;
+    color: inherit;
+}
+
+body[data-force-prefixes="false"] .char-prefix.optional { 
+    display: none;
+}
+body[data-force-prefixes="true"] .char-prefix.char-prefix.optional,
+.char-prefix.forced {
+    display:inline;
+    color: var(--color-highlight); /* Color base del prefijo */
+    transition: color var(--transition-fast);
+}
+
+/* 🟢 MARCO VISUAL PARA BLOQUES DE CÓDIGO */
+p.code-block {
+    display: block; /* Obligamos a que actúe como un bloque independiente */
+
+    font-family: var(--code-font-family);
+    font-size: var(--font-size-base);
+
+    letter-spacing: calc(var(--main-letter-spacing) * 1.01);
+    word-spacing: calc(var(--main-word-spacing) * 1.01);
+    line-height: calc(var(--main-line-height) * 1.01);
+
+    background-color: var(--color-surface, rgba(0, 0, 0, 0.05));
+    border: var(--border-width-sm) solid var(--color-border, #ccc);
+    border-radius: var(--radius-lg);
+
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    
+    /* 1. Activamos el scroll horizontal explícito */
+    overflow-x: auto;
+
+    /* 2. Respetamos los espacios originales del markdown, 
+          pero NO forzamos el salto si la línea excede el ancho de la pantalla */
+    white-space: pre;
+    
+    /* 3. Aseguramos que nada intente romper el texto a la fuerza */
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none; 
+    -webkit-hyphens: none;
+}
+
+/* El grupo es invisible por defecto para no ensuciar la interfaz */
+.copy-group {
+    /* 🟢 EL FIX: Outline envuelve la silueta poligonal de las líneas */
+    outline: var(--border-width-md) dashed transparent;
+    outline-offset: var(--outline-offset-button); /* Un poco de aire para que no pise el texto */
+    border-radius: var(--radius-md); /* Los navegadores modernos curvarán las esquinas del polígono */
+    
+    padding: var(--spacing-xs) 0; /* Padding lateral en cero para no separar el texto del guion */
+    transition: 
+        outline-color var(--transition-fast), 
+        outline-style var(--transition-fast), 
+        background-color var(--transition-fast);
+}
+
+/* 🟢 Solo se activa cuando el usuario "está dentro" */
+.copy-group:focus-within,
+.copy-group.active-playback {
+    outline-color: var(--color-accent);
+    border-color: transparent;
+}
+
+/* Estilo punteado específico */
+.copy-group:focus-within {
+    outline-style: dotted;
+}
+
+.visually-hidden { 
+    position: absolute !important; 
+    width: 1px !important; height: 1px !important; 
+    padding: 0 !important; margin: -1px !important; 
+    overflow: hidden !important; 
+    clip: rect(0, 0, 0, 0) !important; 
+    white-space: nowrap !important; 
+    border: 0 !important; 
+}
+
+/* ==========================================================
+   🎩 VORTEXSPIRA: SISTEMA DE VISIBILIDAD DINÁMICA (MODOS Y VOCES)
+   ========================================================== */
+
+/* 1. GESTIÓN DE MODOS DE REPRODUCCIÓN */
+/* Ocultar frases Story cuando estamos en modo Tech */
+body[data-course-mode="tech"] .phrase.story {
+    display: none !important;
+}
+
+/* Ocultar frases Tech cuando estamos en modo Story */
+body[data-course-mode="story"] .phrase.tech {
+    display: none !important;
+}
+
+/* 2. COLAPSO DE PÁRRAFOS VACÍOS (Evita huecos en blanco en la pantalla) */
+/* Ocultar <p> si SOLO contiene frases Story y estamos en modo Tech */
+body[data-course-mode="tech"] p:not(:has(.phrase:not(.story))):not(.help-node) {
+    display: none !important;
+}
+
+/* Ocultar <p> si SOLO contiene frases Tech y estamos en modo Story */
+body[data-course-mode="story"] p:not(:has(.phrase:not(.tech))):not(.help-node) {
+    display: none !important;
+}
+
+/* ========================================================
+   🔴 CAPITULO BLOQUEADO
+   ======================================================== */
+.locked-chapter-notice,
+.course-empty-mode-notice {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+    text-align: center; 
+    padding: var(--spacing-xl);
+}
+.locked-chapter-polite,
+.course-empty-mode-polite {
+    font-size: 3rem; 
+    margin-bottom: var(--spacing-md);
+}
+.locked-chapter-assertion,
+.course-empty-mode-assertion {
+    font-size: 3rem; 
+    margin-bottom: var(--spacing-md); 
+    color: var(--color-danger);
+}
+
+/* ========================================================
+   🖥️ MODO DESKTOP (Holgado en Ancho y Alto)
+   ======================================================== */
+body[data-layout="desktop"] .vertical-brand {
+    position: relative;
+    width: var(--desktop-brand-width);
+    background: var(--color-surface);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Cabecera móvil oculta */
+body[data-layout="desktop"] #mobile-brand-header {
+    display: none;
+}
+
+body[data-layout="desktop"][data-safe-mode="false"] .content-col {
+    margin-left: var(--desktop-brand-width); /* Hueco para el Brand Fixed */
+}
+body[data-layout="desktop"][data-safe-mode="false"] footer {
+    margin-left: var(--desktop-brand-width); /* Hueco para el Brand Fixed */
+    max-width: calc(100% - var(--desktop-brand-width));
+}
+
+/* ========================================================
+   📱 MODO MÓVIL (Ancho pequeño o fuente gigante)
+   ======================================================== */
+body[data-layout="mobile"] .main-wrapper { 
+    width: var(--size-full); 
+    height: var(--size-full); 
+    display: flex; 
+    flex-direction: column; 
+}
+
+body[data-layout="mobile"] main { 
+    max-width: var(--size-full); 
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
+    flex: 1 1 auto; 
+    overflow-y: auto; 
+}
+
+body[data-layout="mobile"] #chapter-selector { 
+    font-size: var(--font-size-sm); 
+}
+
+/* ========================================================
+   🚨 MODO EMERGENCIA SAFE MODE (Por alto pequeño o interlineado gigante)
+   ======================================================== */
+body[data-safe-mode="true"] .scroll-area {
+    overflow-y: auto; /* 🟢 LA MAGIA: El scroll sube a esta caja y para antes del footer */
+}
+    
+body[data-safe-mode="true"] .content-col {
+    flex: none;
+    height: auto;
+    overflow: visible;
+    margin-left: 0; /* Anulamos hueco de Desktop */
+}
+    
+body[data-safe-mode="true"] main {
+    flex: none;
+    height: auto;
+    padding: var(--spacing-xs) !important;
+    overflow: visible; /* 🟢 MATAMOS EL SCROLL INTERNO de main */
+}
+    
+body[data-safe-mode="true"] footer {
+    margin-left: 0; /* Anulamos hueco de Desktop */
+}
+
+/* --- styles/layouts/style-layout.css --- */

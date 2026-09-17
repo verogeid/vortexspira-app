@@ -1,0 +1,17 @@
+{
+  "id": "demo",
+  "name": "VortexSpira EdTech - Lógica Universal: El Patrón Oculto",
+  "short_name": "DEMO",
+  "description": "Plataforma de aprendizaje accesible AAA",
+  "start_url": "/data/demo/index.html?source=pwa",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F89707",
+  "icons": [
+    {
+      "src": "/data/demo/favicon.png",
+      "sizes": "194x194",
+      "type": "image/png"
+    }
+  ]
+}

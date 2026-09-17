@@ -1,0 +1,93 @@
+/* --- styles/themes/style-theme-scheme-forced-mobile.css --- */
+
+/* =========================================================
+   PARCHE PARA MÓVILES (Terminal Touch)
+   Soluciona el bug de opacidad de "Highlight" en Android/iOS
+   ========================================================= */
+
+body[data-theme="forced"][data-terminal="touch"] {
+    /* Forzamos el comportamiento del navegador */
+    color-scheme: dark;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+
+    /* --- Fondos y Superficies --- */
+    --color-background: #000000 !important;
+    --color-surface: #000000 !important;
+    --color-card-bg: #000000 !important;
+    --color-mask-gradient: #000000 !important;
+
+    /* --- Textos (Blanco sólido para máxima visibilidad) --- */
+    --color-primary: #FFFFFF !important;
+    --color-secondary: #FFFFFF !important;
+    --color-header-text: #FFFFFF !important;
+    --color-footer-text: #FFFFFF !important;
+    
+    /* --- Acentos e Interactividad (Cian sólido para Touch) --- */
+    --color-accent: #00FFFF !important;
+    --color-accent-bg: transparent !important;
+    --color-btn-primary-bg: #00FFFF !important;
+    
+    /* --- Bordes --- */
+    --color-border: #FFFFFF !important;
+    --color-input-border: #FFFFFF !important;
+    --color-card-border-disabled: #888888 !important;
+    --color-border-placeholder: #888888 !important;
+
+    /* --- Estados Semánticos (Mapeo a Blanco/Cian) --- */
+    --color-success: #FFFFFF !important;
+    --color-success-bg: transparent !important;
+    --color-danger: #FFFFFF !important;
+    --color-danger-bg: transparent !important;
+    --color-fire: #FFFFFF !important;
+    --color-highlight: #00FFFF !important;
+    --color-highlight-text: #000000 !important;
+
+    /* --- Sombras y Efectos (Anulados para evitar ruido) --- */
+    --color-shadow-primary: transparent !important;
+    --color-shadow-disabled: transparent !important;
+    --color-shadow-modal: #000000 !important;
+    --shadow-color-hex: transparent !important;
+    --shadow-opacity: 0 !important;
+
+    /* --- UI Específica --- */
+    --color-toast-bg: #000000 !important;
+    --color-toast-text: #FFFFFF !important;
+    --color-details-action-item-hover: transparent !important;
+    --ui-readonly-bg: #000000 !important;
+    
+    /* --- Branding --- */
+    --color-icon-obras: #FFFFFF !important;
+    --color-logo-static: #FFFFFF !important;
+    --color-logo-dynamic: #00FFFF !important;
+
+    /* --- Accesibilidad Modal --- */
+    --color-a11y-selected-text: #000000 !important;
+    --color-a11y-slider-track: #FFFFFF !important;
+    --color-a11y-slider-labels: #888888 !important;
+    --color-separator: #FFFFFF !important;
+}
+
+/* 🛡️ Forzado de estados táctiles en móvil (Solo interactivos del contenido) */
+
+/* 1. Al recibir foco: Cualquier botón (excepto las pestañas), y el thumb de los sliders */
+body[data-theme="forced"][data-terminal="touch"] button:not(.tab-btn):focus,
+body[data-theme="forced"][data-terminal="touch"] input[type="range"]:focus::-webkit-slider-thumb,
+/* 2. Al estar activos: Solo los botones de opciones (ej. Atkinson, Claro, etc.) */
+body[data-theme="forced"][data-terminal="touch"] .a11y-option-btn.active {
+    forced-color-adjust: none !important;
+    background-color: #00FFFF !important;
+    color: #000000 !important;
+}
+/* Y específicamente para tu checkbox customizado cuando está marcado */
+body[data-theme="forced"][data-terminal="touch"] input[type="checkbox"]:checked + .custom-check {
+    background-color: #00FFFF !important;
+}
+
+body[data-theme="forced"][data-terminal="touch"] .visual-toast {
+    background-color: var(--color-toast-bg) !important;
+    color: var(--color-toast-text) !important;
+    border: 2px solid var(--color-accent) !important;
+}
+
+/* --- styles/themes/style-theme-scheme-forced-mobile.css --- */

@@ -1,0 +1,520 @@
+/* --- styles/components/style-modal-activation.css --- */
+
+.activation-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.install-app-section {
+    display: flex;
+    flex-direction: column; /* 🟢 Cambiamos a columna para apilar header y warning */
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-surface);
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-sm); /* Espacio entre el header y la advertencia */
+}
+.install-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: var(--spacing-sm);
+}
+body[data-safe-mode="true"] .install-header-row {
+    gap: var(--spacing-xxs);
+}
+.install-warning {
+    font-size: var(--font-size-sm);
+    color: var(--color-secondary);
+    margin: 0;
+    
+    /* Aseguramos que respete la accesibilidad si el usuario hace zoom */
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+}
+body[data-safe-mode="true"] .install-warning {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3; -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+/* 🟢 GESTIÓN DEL TEXTO DE INSTALACIÓN */
+.install-text-wrapper {
+    flex: 1; /* Toma todo el espacio disponible y empuja al botón a la derecha */
+    font-weight: bold;
+    font-size: var(--font-size-md);
+    padding-right: var(--spacing-sm);
+    
+    /* Aplicamos también la rotura de palabras por si el nombre del curso es masivo */
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+}
+body[data-safe-mode="true"] .install-prefix,
+body[data-safe-mode="true"] .install-suffix {
+    /* 🟢 FIX: Puntos suspensivos multilínea */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3; -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+body[data-safe-mode="true"] .install-text-wrapper .hide-safe {
+    display: none;
+}
+.install-app-section .control-wrapper.button-wrapper {
+    flex-shrink: 0; 
+}
+
+/* 🟢 HIT AREA Y FORMAS DE BOTONES GHOST */
+.btn-install-square,
+.purchase-link,
+.exam-link,
+.btn-exam,
+.btn-rescue {
+    width: var(--ui-hit-area);
+    height: var(--ui-hit-area);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: var(--radius-md); /* Redondeado por defecto */
+    padding: 0; /* Anula paddings que lo hagan rectangular */
+}
+
+/* Redondos si están deshabilitados (regla de diseño solicitada) */
+.btn-exam[aria-disabled="true"],
+.purchase-link[aria-disabled="true"],
+.exam-link[aria-disabled="true"] {
+    border-radius: var(--radius-circle);
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+    pointer-events: none; /* Bloquea el hover visual */
+}
+
+.activation-instruction {
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-secondary);
+}
+
+/* 🟢 FORMULARIO HORIZONTAL Y CONTROLES */
+.activation-form-layout.row-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; 
+    gap: var(--spacing-md);
+}
+
+.activation-inputs-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-control {
+    width: 100%;
+    min-height: var(--ui-hit-area); /* Hit area garantizada */
+    padding: var(--spacing-sm);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-xl);
+    font-family: inherit;
+    font-size: var(--font-size-md);
+    transition: 
+        border-color var(--transition-fast), 
+        box-shadow var(--transition-fast), 
+        opacity var(--transition-fast);
+    outline: none;
+}
+
+.input-control:focus,
+.input-control:focus-visible {
+    border-width: var(--border-width-focus);
+    border-color: var(--color-accent);
+}
+
+.input-control[disabled="true"] {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+    background-color: transparent;
+    border-color: var(--color-border);
+    color: var(--color-primary);
+}
+
+.activation-btn-col {
+    display: flex;
+    align-items: stretch;
+}
+
+/* 🟢 FIX: Forzamos al wrapper y al botón a estirarse para igualar la altura de los inputs */
+.activation-btn-col .control-wrapper.button-wrapper {
+    /* El wrapper hereda la altura de su padre flex (que ya está en stretch por la columna) */
+    height: 100%; 
+}
+
+#activation-container .btn-ghost {
+    min-width: var(--ui-hit-area);
+    min-height: var(--ui-hit-area);
+
+    border-color: var(--color-border);
+    border-style: solid;
+    border-width: var(--border-width-idle);
+
+    background-color: var(--color-surface);
+
+    outline: none;
+}
+#activation-container .btn-ghost:not(.disabled):not([aria-disabled="true"]) {
+    border-radius: var(--radius-md);
+    opacity: 1;
+    cursor: pointer;
+}
+#activation-container .module-item .btn-ghost.disabled,
+#activation-container .module-item .btn-ghost[aria-disabled="true"] {
+    border-radius: var(--radius-circle);
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+}
+
+#submit-activation-btn {
+    /* El botón se estira para ocupar todo el espacio "seguro" del wrapper */
+    height: 100%; 
+    width: var(--ui-hit-area); 
+    
+    padding: 0;
+    padding-top: var(--spacing-xs);
+
+    /* Garantizamos que el icono quede perfectamente centrado en el botón alargado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#activation-container #submit-activation-btn[data-mode="clear"] .icon-svg {
+    background-color: var(--color-danger);
+}
+
+#activation-container #submit-activation-btn:not([data-mode="clear"]):hover {
+    border-color: var(--color-accent);
+}
+#activation-container #submit-activation-btn[data-mode="clear"]:hover {
+    border-color: var(--color-danger);
+}
+#activation-container #submit-activation-btn:not([data-mode="clear"]):focus,
+#activation-container #submit-activation-btn:not([data-mode="clear"]):focus-visible {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+#activation-container #submit-activation-btn[data-mode="clear"]:focus,
+#activation-container #submit-activation-btn[data-mode="clear"]:focus-visible {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+/* 🟢 ESTADOS DE MENSAJES VÍA DATA-ATTRIBUTES */
+.status-message {
+    min-height: var(--ui-hit-area);
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+}
+
+.status-message[data-status="empty"],
+.status-message[data-status="validating"] { color: var(--color-secondary); }
+.status-message[data-status="success"] { color: var(--color-success); }
+.status-message[data-status="error"] { color: var(--color-danger); }
+
+/* 🟢 ÁRBOL DE CATÁLOGO */
+.course-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-sm);
+    background-color: transparent;
+
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    overflow: hidden;
+}
+
+.course-group-header {
+    display: flex;
+    align-items: center; justify-content: space-between;
+    background-color: var(--color-surface);
+    padding: var(--spacing-sm);
+    font-weight: bold;
+    min-width: 0; /* 🟢 FIX: Permite que el contenedor flex principal se encoja */
+    gap: var(--spacing-sm); /* 🟢 FIX: Asegura separación entre texto y botón */
+}
+body[data-safe-mode="true"] .course-group-header {
+    padding: var(--spacing-xxs);
+}
+.course-group-header .control-wrapper.button-wrapper {
+    margin-left: auto; /* Empuja el botón a la derecha */
+    flex-shrink: 0; /* 🟢 FIX: El botón nunca se encoge */
+}
+
+/* 🟢 MÓDULOS: JERARQUÍA Y ESPACIADO */
+.course-modules-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--spacing-sm); /* Más aire interno */
+}
+body[data-safe-mode="true"] .course-modules-list {
+    padding: 0 var(--spacing-xxs); /* Más aire interno */
+}
+
+.module-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-surface);
+    padding: var(--spacing-sm);
+    min-width: 0; /* 🟢 FIX: Permite que la fila se encoja */
+}
+body[data-safe-mode="true"] .module-item {
+    padding: var(--spacing-xxs);
+}
+
+.module-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+    min-width: 0; /* 🟢 FIX: Obliga al contenedor flex a encogerse y permitir el salto de línea */
+}
+body[data-safe-mode="true"] .module-info {
+    width: 100%;
+}
+
+.icon-corner {
+    width: var(--spacing-px-24);
+    height: var(--spacing-px-24);
+    background-color: var(--color-secondary);
+
+    transform: translateY(calc(-1 * var(--spacing-px-4)));
+    flex-shrink: 0;
+}
+body[data-safe-mode="true"] .icon-corner {
+    display: none;
+}
+body:not([data-safe-mode="true"]) .show-safe {
+    display: none;
+}
+body[data-safe-mode="true"] .show-safe {
+    display: block;
+    flex-shrink: 0;
+}
+
+.module-info .module-title-text,
+.course-group-header .module-title-text {
+    word-break: break-word; /* Permite romper palabras largas si es estrictamente necesario */
+    hyphens: auto; /* Inserta guiones ortográficos al romper la palabra */
+    overflow-wrap: anywhere; /* Fallback moderno para rotura */
+
+    cursor: pointer;
+    font-weight: 500;
+    transition: 
+        color var(--transition-fast), 
+        transform var(--transition-fast);
+    transform-origin: left center; 
+
+    /* 🟢 FIX: Control de caja para el escalado visual */
+    display: block;
+    flex: 1;
+    min-width: 0;
+    /* Reservamos un colchón de espacio invisible. 
+       Al escalar (scale), el texto crecerá ocupando este padding en lugar de romper el borde derecho */
+    padding-right: var(--spacing-md);
+}
+body[data-safe-mode="true"] .module-info .module-title-text,
+body[data-safe-mode="true"] .course-group-header .module-title-text {
+    /* 🟢 FIX: Puntos suspensivos multilínea */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3; -webkit-line-clamp: 3;
+    overflow: hidden;
+    padding-right: 0;
+}
+
+/* 🟢 ESTADOS VACÍOS PARA MENÚS (Metáfora de inactividad) */
+.empty-state-pill {
+    display: inline-block;
+    border-radius: var(--radius-xl); /* Forma de píldora perfecta */
+    color: var(--color-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm); 
+    margin-left: calc(var(--spacing-sm) * -1);
+    outline: none;
+    cursor: default;
+    font-size: var(--font-size-sm);
+    transition: outline-color var(--transition-fast);
+}
+
+.empty-state-pill:focus,
+.empty-state-pill:focus-visible {
+    /* Mantenemos el grosor y el offset AAA, pero atenuamos el color de impacto */
+    outline: var(--border-width-focus) solid var(--color-secondary);
+    outline-offset: var(--outline-offset-button);
+}
+
+/* =================================================================
+   🟢 GESTIÓN DE CURSORES E INTERACTIVIDAD SEGÚN EL CATÁLOGO ACTIVO
+   ================================================================= */
+
+/* Quitamos el outline nativo del navegador porque pintaremos el botón interior */
+.interact-item {
+    outline: none;
+}
+
+/* 1. PRODUCTOS ADQUIRIDOS (.is-owned) */
+.course-group.is-owned .course-group-header {
+    cursor: default; 
+}
+.course-group.is-owned .module-item {
+    cursor: pointer; 
+}
+
+/* Hover y Foco sobre la fila: Colorea el texto */
+.course-group.is-owned .interact-item:hover .module-title-text,
+.course-group.is-owned .interact-item:focus .module-title-text,
+.course-group.is-owned .interact-item:focus-visible .module-title-text {
+    color: var(--color-accent);
+}
+
+/* Foco sobre la fila: Escala el texto */
+body:not([data-safe-mode="true"]) .course-group.is-owned .interact-item:focus .module-title-text,
+body:not([data-safe-mode="true"]) .course-group.is-owned .interact-item:focus-visible .module-title-text {
+    transform: scale(var(--scale-focus-md));
+}
+
+/* 2. CATÁLOGO DISPONIBLE (.is-avail) */
+.course-group.is-avail.interact-item {
+    cursor: pointer; 
+    padding: 0 var(--spacing-sm);
+}
+
+/* Hover y Foco sobre la fila del catálogo: Colorea el texto */
+.course-group.is-avail.interact-item:hover .module-title-text,
+.course-group.is-avail.interact-item:focus .module-title-text,
+.course-group.is-avail.interact-item:focus-visible .module-title-text {
+    color: var(--color-accent);
+}
+
+/* Foco sobre la fila del catálogo: Escala el texto */
+body:not([data-safe-mode="true"]) .course-group.is-avail.interact-item:focus .module-title-text,
+body:not([data-safe-mode="true"]) .course-group.is-avail.interact-item:focus-visible .module-title-text {
+    transform: scale(var(--scale-focus-md));
+}
+
+#view-activation .interact-item .btn-ghost.btn-ghost:not(.disabled),
+#view-activation .interact-item .btn-ghost:not([aria-disabled="true"]) {
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+#view-activation .interact-item .btn-ghost.disabled,
+#view-activation .interact-item .btn-ghost[aria-disabled="true"] {
+    border-radius: var(--radius-circle);
+    cursor: not-allowed;
+}
+
+/* 🟢 ILUMINACIÓN DEL BOTÓN INTERIOR AL ENFOCAR LA FILA */
+#view-activation .interact-item:hover .btn-ghost {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+#view-activation .interact-item:focus .btn-ghost,
+#view-activation .interact-item:focus-visible .btn-ghost {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    border-width: var(--border-width-focus);
+    transform: scale(var(--scale-focus-md));
+}
+
+/* Protegemos el icono SVG para que no se tiña de acento */
+#view-activation .interact-item:focus .btn-ghost:not(.disabled) .icon-svg,
+#view-activation .interact-item:focus-visible .btn-ghost:not(.disabled) .icon-svg,
+#view-activation .interact-item:focus .btn-ghost:not([aria-disabled="true"]) .icon-svg,
+#view-activation .interact-item:focus-visible .btn-ghost:not([aria-disabled="true"]) .icon-svg {
+    color: var(--color-accent);
+}
+
+#view-activation .interact-item:focus .btn-ghost.disabled .icon-svg,
+#view-activation .interact-item:focus-visible .btn-ghost.disabled .icon-svg,
+#view-activation .interact-item:focus .btn-ghost[aria-disabled="true"] .icon-svg,
+#view-activation .interact-item:focus-visible .btn-ghost[aria-disabled="true"] .icon-svg {
+    color: var(--color-primary) !important;
+    background-color: var(--color-primary) !important;
+}
+
+/* SANGRÍA ANIDADA PARA MÓDULOS DENTRO DE PACKS */
+.module-item.is-child {
+    margin-left: var(--spacing-px-24);
+}
+
+body[data-safe-mode="true"] .module-item.is-child {
+    margin-left: var(--spacing-md);
+}
+
+/* 🟢 WRAPPERS DE CONTROL PARA EVITAR LAYOUT SHIFTS (AAA) */
+
+#view-activation .control-wrapper.button-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    --growth-scale: calc((var(--ui-hit-area) * var(--zoom-md)) / 2);
+    --growth-border: calc(var(--border-width-focus) - var(--border-width-idle));
+    --pad-comp: calc(var(--growth-scale) + var(--growth-border));
+
+    padding: var(--pad-comp);
+    margin: calc(var(--pad-comp) * -1);
+    transform: translateY(var(--spacing-xs));
+}
+
+#view-activation .control-wrapper.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    --growth-scale-x: calc(100% * (var(--zoom-sm) / 2));
+    --growth-scale-y: calc((var(--ui-hit-area) * var(--zoom-md)) / 2);
+    --growth-border: calc(var(--border-width-focus) - var(--border-width-idle));
+
+    padding: calc(var(--growth-scale-y) + var(--growth-border)) calc(var(--growth-scale-x) + var(--growth-border));
+    margin: calc((var(--growth-scale-y) + var(--growth-border)) * -1) calc((var(--growth-scale-x) + var(--growth-border)) * -1);
+}
+
+#view-activation .control-wrapper > .interact-btn,
+#view-activation .control-wrapper > .input-control {
+    margin: 0 !important; 
+    transition: 
+        transform var(--transition-fast), 
+        border-color var(--transition-fast), 
+        border-width var(--transition-fast);
+}
+
+#view-activation .control-wrapper.button-wrapper > .interact-btn:focus,
+#view-activation .control-wrapper.button-wrapper > .interact-btn:focus-visible {
+    transform: scale(var(--scale-focus-md));
+}
+
+#view-activation .control-wrapper.input-wrapper > .input-control:focus,
+#view-activation .control-wrapper.input-wrapper > .input-control:focus-visible {
+    transform: scale(var(--scale-focus-sm), var(--scale-focus-md));
+}
+
+/* --- styles/components/style-modal-activation.css --- */

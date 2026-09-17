@@ -1,0 +1,154 @@
+/* --- styles/base/style-header.css --- */
+
+header {
+    width: var(--size-full);
+    background-color: var(--color-surface);
+    border-bottom: var(--border-width-idle) solid var(--color-border);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+header h1 {
+    font-size: var(--font-size-lg);
+    margin: var(--spacing-none);
+    color: var(--color-primary);
+    text-align: center;
+}
+
+.course-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-secondary);
+    margin: var(--spacing-none);
+    font-style: italic;
+    text-align: center;
+}
+
+.controls {
+    width: var(--size-full);
+    max-width: var(--main-max-width);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    /*max-width: var(--main-width-ratio);*/
+    width: 100%;
+}
+
+header label {
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.selector-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+/* 🟢 DROPDOWN: Altura mínima AAA de 44px */
+#chapter-selector {
+    width: 100%;
+    min-height: var(--ui-hit-area);
+
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-xl);
+
+    background-color: var(--color-surface);
+
+    color: var(--color-primary);
+    font-size: var(--font-size-md);
+
+    padding: 0 var(--spacing-em-2) 0 var(--spacing-sm);
+
+    transition: all var(--transition-fast);
+
+    outline: none;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    cursor: pointer;
+}
+#chapter-selector[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--opacity-disabled);
+}
+
+#chapter-selector:hover {
+    border-color: var(--color-accent);
+}
+
+#chapter-selector:focus,
+#chapter-selector:focus-visible {
+    border-width: var(--border-width-focus);
+    border-color: var(--color-accent);
+    transform: scale(var(--scale-focus-sm));
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN (Ocultando los títulos duplicados)
+   ======================================================== */
+
+body[data-layout="desktop"][data-safe-mode="false"] .header-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+body[data-layout="mobile"] header,
+body[data-safe-mode="true"] header { padding: var(--spacing-sm); }
+    
+/* 🟢 FIX AAA: Ocultamos el H1 y H2 visualmente, pero se mantienen en el DOM 
+    para que el lector de pantallas encuentre su estructura de encabezados. */
+body[data-layout="mobile"] .header-titles,
+body[data-safe-mode="true"] .header-titles {
+    position: absolute !important; 
+    width: 1px !important; 
+    height: 1px !important; 
+    padding: 0 !important; 
+    margin: -1px !important; 
+    overflow: hidden !important; 
+    clip: rect(0, 0, 0, 0) !important; 
+    white-space: nowrap !important; 
+    border: 0 !important;
+}
+
+body[data-layout="mobile"] .controls,
+body[data-safe-mode="true"] .controls {
+    max-width: var(--main-width-mobile);
+}
+
+body[data-safe-mode="true"] header {
+    /* 🟢 Quitamos el padding del header casi por completo */
+    padding: var(--spacing-px-2) var(--spacing-xs) !important;
+}
+
+body[data-safe-mode="true"] .control-group {
+    /* 🟢 Eliminamos el gap entre la palabra "Tema" y el selector */
+    gap: var(--spacing-xs) !important;
+}
+
+/* Reducimos un poco el label para ganar espacio para el selector */
+body[data-safe-mode="true"] header label {
+    font-size: var(--font-size-sm) !important;
+}
+
+body[data-safe-mode="true"] #chapter-selector {
+    font-size: var(--font-size-sm) !important;
+}
+
+/* --- styles/base/style-header.css --- */

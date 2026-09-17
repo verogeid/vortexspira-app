@@ -1,0 +1,225 @@
+/* --- styles/components/style-modal-a11y.css --- */
+
+/* SLIDER VALUE */
+#view-a11y .slider-value {
+    min-width: var(--modal-ally-value-min-width);
+}
+
+/* 🟢 GRUPOS DE BOTONES: Flex wrap relativo a las variables */
+#view-a11y .buttons-container {
+    display: flex;
+    flex-wrap: wrap; 
+
+    align-items: stretch; 
+    gap: var(--spacing-sm);
+    margin: var(--spacing-none);
+    box-sizing: border-box;
+}
+
+#view-a11y .button-wrapper {
+    flex: 1 1 calc(33% - var(--spacing-md));
+
+    height: calc(var(--main-line-height) * var(--font-size-sm) * 2);
+    min-height: var(--ui-hit-area);
+    min-width: 12ch;
+}
+
+body[data-layout="mobile"] #view-a11y .button-wrapper {
+    flex: 1 1 calc(50% - var(--spacing-md));
+}
+
+body[data-safe-mode="true"] #view-a11y .button-wrapper {
+    flex: 1 1 100%;
+
+    /* 🟢 Forzamos que todos los wrappers de la fila tengan la misma altura */
+    align-items: stretch; 
+    gap: var(--spacing-xs);
+}
+
+#view-a11y .button-wrapper { 
+    /* Los botones ocupan el ancho disponible pero respetan el min/max */
+    flex: 1 1 calc(33.333% - var(--spacing-xl));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* 🟢 SIMETRÍA TOTAL: El aire entre botones es padding_izq + padding_der.
+       Al ser igual en los 4 lados, el gap vertical y horizontal es idéntico. */
+    padding: var(--spacing-sm); 
+    box-sizing: border-box;
+
+    min-width: 0;
+}
+
+body[data-safe-mode="true"] #view-a11y .button-wrapper {
+    padding: 0;
+    display: flex; /* Para que el botón ocupe todo el wrapper */
+
+    flex: 1 1 100%;
+}
+
+#view-a11y .a11y-option-btn {
+    /* 🟢 FIX AAA: Control de Desbordamiento Extremo */
+    word-break: break-word; /* Permite romper palabras largas si es estrictamente necesario */
+    hyphens: auto; /* Inserta guiones ortográficos al romper la palabra */
+    overflow-wrap: anywhere; /* Fallback moderno para rotura */
+
+    width: var(--size-full);
+    min-width: 0;
+
+    height: var(--size-full);
+    min-height: var(--ui-hit-area);
+
+    white-space: normal; /* Reflow AAA: El texto fluye, no se corta */
+
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    background-color: var(--color-surface);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    letter-spacing: var(--main-letter-spacing);
+    word-spacing: var(--main-word-spacing);
+    line-height: var(--main-line-height);
+    
+    cursor: pointer;
+
+    border: var(--border-width-idle) solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    padding: var(--spacing-xs) var(--spacing-sm);
+
+    transition: 
+        transform var(--transition-fast), 
+        border-color var(--transition-fast), 
+        color var(--transition-fast),
+        background-color var(--transition-fast);
+    outline: none;
+}
+
+body[data-safe-mode="true"] #view-a11y .a11y-option-btn {
+    min-height: var(--ui-hit-area);
+    height: 100%;
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+
+    /* 🟢 Permitimos que el texto rompa en líneas si es muy grande */
+    white-space: normal; 
+    word-break: break-word;
+    line-height: var(--main-line-height);
+}
+
+#view-a11y .a11y-option-btn:hover {
+    border-color: var(--color-accent);
+}
+
+#view-a11y .a11y-option-btn:focus,
+#view-a11y .a11y-option-btn:focus-visible {
+    transform: scale(calc(1 + var(--zoom-md) / 2), var(--scale-focus-md));
+    border-color: var(--color-accent);
+    border-width: var(--border-width-focus);
+    color: var(--color-accent);
+
+    z-index: 2;
+}
+
+body[data-safe-mode="true"] #view-a11y .a11y-option-btn:focus,
+body[data-safe-mode="true"] #view-a11y .a11y-option-btn:focus-visible {
+    transform: scale(calc(1 + var(--zoom-sm) / 2), var(--scale-focus-sm));
+}
+
+#view-a11y .a11y-option-btn.active { 
+    background-color: var(--color-primary); 
+    border-color: var(--color-border); 
+    color: var(--color-surface); 
+}
+
+#view-a11y .a11y-option-btn.active:hover { 
+    background-color: var(--color-accent); 
+    border-color: var(--color-border); 
+}
+
+#view-a11y .a11y-option-btn.active:focus-visible, 
+#view-a11y .a11y-option-btn.active:focus { 
+    background-color: var(--color-accent); 
+    border-color: var(--color-primary); 
+    border-width: var(--border-width-focus); 
+}
+
+/* 🟢 BOTÓN RESET */
+#view-a11y .modal-footer {
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end;
+    padding-top: var(--spacing-sm); 
+    margin-top: var(--spacing-md); 
+    padding-left: var(--spacing-sm); 
+    padding-right: var(--spacing-md);
+}
+
+#view-a11y #btn-a11y-reset {
+    width: var(--ui-hit-area); 
+    height: var(--ui-hit-area);
+
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+
+    color: var(--color-primary); 
+    font-size: var(--font-size-sm);
+
+    border-color: transparent; 
+    border-radius: var(--radius-md); 
+    border: var(--border-width-idle) solid transparent;
+
+    transition: all var(--transition-fast); 
+    outline: none; 
+    background-color: transparent;
+
+    cursor: pointer;
+}
+
+#view-a11y #btn-a11y-reset[aria-disabled="true"] {
+    opacity: var(----opacity-disabled);
+    border-radius: var(--radius-circle);
+    cursor: not-allowed;
+}
+
+#view-a11y #btn-a11y-reset:focus,
+#view-a11y #btn-a11y-reset:focus-visible {
+    transform: scale(var(--scale-focus-md));
+    
+    border-width: var(--border-width-focus);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+/* Evitamos que haga el efecto "hover" si está deshabilitado */
+#view-a11y #btn-a11y-reset[aria-disabled="true"]:hover {
+    border-color: var(--color-border);
+}
+
+/* Pero mantenemos la caja de foco AAA si navega hasta él con el teclado */
+#view-a11y #btn-a11y-reset[aria-disabled="true"]:focus,
+#view-a11y #btn-a11y-reset[aria-disabled="true"]:focus-visible {
+    border-color: var(--color-border);
+    color: var(--color-primary);
+    transform: none; /* No salta ni escala */
+    outline: var(--border-width-idle) solid var(--color-accent);
+    outline-offset: var(--outline-offset-button);
+}
+
+#view-a11y #btn-a11y-reset:hover .icon-reset,
+#view-a11y #btn-a11y-reset:focus .icon-reset,
+#view-a11y #btn-a11y-reset:focus-visible .icon-reset {
+    background-color: var(--color-danger) !important;
+    transform: rotate(90deg);
+}
+
+#view-a11y .stepper-display-value {
+    min-width: var(--modal-ally-value-min-width);
+}
+/* --- styles/components/style-modal-a11y.css --- */

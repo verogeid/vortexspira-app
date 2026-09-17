@@ -1,0 +1,267 @@
+{
+  "ui": {
+    "brand": {
+      "vortex_aria": "Visitar el expositor de cursos (abre en una nueva pestaña)",
+      "vortex_title": "Visitar el expositor de cursos (abre en una nueva pestaña)",
+      "text": "VortexSpira<sup><sup>&copy;</sup></sup>&nbsp;EdTech",
+      "ty_aria": "Visitar la web de TesteandoYa (abre en una nueva pestaña)",
+      "partner_aria": "Visitar la web del colaborador (abre en una nueva pestaña)"
+    },
+    "header": {
+      "theme_label": "Tema:"
+    },
+    "footer": {
+      "nav_toolbar_aria": "Controles de navegación",
+      "config_toolbar_aria": "Controles de configuración",
+      "copy_toolbar_aria": "Controles de copiado",
+      "btn_prev_aria": "Fragmento o frase anterior",
+      "btn_prev_title": "Fragmento o frase anterior",
+      "btn_play_aria": "Reproducir",
+      "playing_aria": "Reproduciendo",
+      "pausing_aria": "Pausando",
+      "btn_pause_aria": "Pausar",
+      "btn_next_aria": "Fragmento o frase siguiente",
+      "btn_restart_aria": "Reiniciar capítulo",
+      "copy_phrase_aria": "Fragmento copiado al portapapeles",
+      "copy_block_aria": "Bloque copiado al portapapeles",
+      "btn_copy_phrase_aria": "Copiar frase",
+      "btn_copy_block_aria": "Copiar bloque",
+      "btn_config_aria": "Panel de Configuración"
+    },
+    "edge": {
+      "first_chapter": "Está en el primer capítulo del curso.",
+      "last_chapter": "Ha llegado al final del curso.",
+      "skipped_content": "saltando capítulos no incluidos en su licencia",
+      "start_chapter": "Inicio del capítulo. Pulse Anterior de nuevo para ir a:",
+      "end_chapter": "Fin del capítulo. Pulse Siguiente de nuevo para ir a:",
+      "course_mode_empty": "No hay contenido para el modo de reproduccion actual.",
+      "locked_chapter_msg": "Este capítulo no está incluido en su licencia actual."
+    }
+  },
+  "modal": {
+    "master": {
+      "close_aria": "Cerrar panel de configuración",
+      "dialog_aria": "Panel de configuración principal",
+      "dialog_opened": "abierto.",
+      "dialog_instructions": "Cambie de pestaña con Tab, muevase por ella con Arriba/Abajo o AvPág/RePág, y cambie valores con los cursores.",
+      "current_tab": "Pestaña actual:",
+      "tab_activation": "Gestionar Licencia",
+      "tab_voices": "Voces y Audio",
+      "tab_a11y": "Accesibilidad Visual",
+      "tab_import": "Cargar Contenido Externo",
+      "tab_help": "Ayuda y Manual"
+    },
+    "a11y": {
+      "title": "Accesibilidad Visual",
+
+      "motion_legend": "Animaciones y Movimiento",
+      "reduce_motion": "Reducir animaciones",
+
+      "font_legend": "Tipografía",
+      "font_btn_title": "Aplicar tipografía",
+      "font_atkinson": "Atkinson (Sans)",
+      "font_serif": "Serif Clásica",
+      "font_lexend": "OpenDyslexic / Lexend",
+      "code_font_legend": "Tipografía para Código y Comandos",
+
+      "font_size_label": "Escala de texto:",
+      "font_size_slider_title": "Ajustar tamaño de fuente",
+      "font_size_reduce_title": "Reducir tamaño de fuente",
+      "font_size_increase_title": "Aumentar tamaño de fuente",
+
+      "letter_spacing_legend": "Espaciados (Dislexia)",
+      "letter_spacing_label": "Separación de caracteres:",
+      "letter_spacing_slider_title": "Ajustar espaciado de caracteres",
+      "letter_spacing_reduce_title": "Reducir espaciado",
+      "letter_spacing_increase_title": "Aumentar espaciado",
+
+      "line_spacing_label": "Interlineado:",
+      "line_spacing_slider_title": "Ajustar interlineado",
+      "line_spacing_reduce_title": "Reducir interlineado",
+      "line_spacing_increase_title": "Aumentar interlineado",
+
+      "spacing_normal": "Normal",
+      "spacing_wide": "Amplio",
+      "spacing_extra": "Extra Amplio",
+      "spacing_compact": "Compacto",
+
+      "theme_legend": "Esquemas de Color",
+      "theme_btn_title": "Aplicar tema visual",
+
+      "theme_system": "Sistema",
+      "theme_light": "Claro",
+      "theme_dark": "Oscuro",
+      "theme_contrast": "Alto Contraste",
+      "theme_forced": "Colores Forzados",
+      "theme_yellow": "Amarillo sobre Negro",
+
+      "reset_btn_title": "Restaurar Valores por Defecto",
+      "reset_success_msg": "Valores por defecto restaurados."
+    },
+    "voices": {
+      "title": "Voces y Audio",
+
+      "general_legend": "Configuración General",
+
+      "course_mode_label": "Modo Teatralizado", 
+
+      "force_prefixes_label": "Mostrar siempre quién habla",
+
+      "continuous_playback_label": "Continuar reproducción en segundo plano",
+
+      "rhythm_legend": "Ritmo de Lectura y Pausas",
+
+      "dictation_reduction_label": "Ralentización en Dictado",
+      "dictation_base": "Ninguno",
+      "dictation_reduction_slider_title": "Ajustar ralentización al dictar textos copiables",
+      "dictation_reduction_decrease_title": "Disminuir ralentización del dictado",
+      "dictation_reduction_increase_title": "Aumentar ralentización del dictado",
+
+      "pause_prose_multiplier_label": "Pausas Reflexivas:",
+      "pause_prose_multiplier_slider_title": "Ajustar la duración de pausas reflexivas",
+      "pause_prose_multiplier_increase_title": "Aumentar la duración",
+      "pause_prose_multiplier_decrease_title": "Disminuir la duración",
+
+      "pause_code_multiplier_label": "Pausas de Dictado:",
+      "pause_code_multiplier_slider_title": "Ajustar la duración de pausas de dictado",
+      "pause_code_multiplier_increase_title": "Aumentar la duración",
+      "pause_code_multiplier_decrease_title": "Disminuir la duración",
+
+      "pause_multiplier_label_base": "Normal",
+
+      "modal_warning": "Aviso: el tono de voz no funciona en todos los navegadores.",
+
+      "voices_legend": "Asignación de Personajes",
+      "voice_select_title": "Seleccionar voz",
+
+      "preview_btn_title": "Escuchar muestra de voz",
+      "preview_text": "VortexSpira EdTech, cargado y listo para comenzar.",
+
+      "mode_story_label": "[Modo Teatralizado]",
+
+      "pitch_label": "Tono de voz:",
+      "pitch_normal": "Normal",
+      "pitch_high": "Agudo",
+      "pitch_low": "Grave",
+      "pitch_slider_title": "Ajustar el tono de voz",
+      "pitch_increase_title": "Aumentar tono de voz",
+      "pitch_decrease_title": "Disminuir tono de voz",
+
+      "rate_label": "Velocidad:",
+      "rate_normal": "Normal",
+      "rate_slow": "Lento",
+      "rate_fast": "Rápido",
+      "rate_slider_title": "Ajustar la velocidad de lectura",
+      "rate_increase_title": "Aumentar velocidad de lectura",
+      "rate_decrease_title": "Disminuir velocidad de lectura",
+
+      "volume_label": "Volumen:",
+      "volume_muted": "Silenciado",
+      "volume_normal": "Normal",
+      "volume_max": "Máximo",
+      "volume_slider_title": "Ajustar el volumen de la voz",
+      "volume_increase_title": "Aumentar volumen de la voz",
+      "volume_decrease_title": "Disminuir volumen de la voz"
+    },
+    "install": {
+      "title": "Instalar VortexSpira",
+      "description": "Instala la aplicación para disfrutar de una experiencia inmersiva, acceso sin conexión a internet y un rendimiento optimizado.",
+      "btn_title": "Instalar aplicación en el sistema",
+      "waiting": "Preparando instalación..."
+    },
+    "activation": {
+      "title": "Gestionar Licencia",
+      "legend_app": "VortexSpira EdTech",
+      "legend_auth": "Activa tu Licencia",
+
+      "email_label": "Email de Compra",
+      "email_title": "Email asociado a tu cuenta",
+
+      "key_label": "Clave de Licencia:",
+      "key_title": "Clave de licencia proporcionada en la compra",
+
+      "submit_title": "Verificar licencia",
+      "clear_title": "Borrar datos de licencia del terminal",
+
+      "legend_catalog": "Catálogo de Productos",
+
+      "owned_summary": "Tus Productos Activados (Acceso a Exámenes)",
+      "exam_title": "Ir al exámen (abre una nueva pestaña)",
+      "exam_pending": "Acceso pendiente de reclamar. Revise su email.",
+      "exam_generating": "Generando examen...",
+
+      "available_summary": "Amplía tu Biblioteca",
+      "purchase_link_title": "Ir a VortexSpira.com a comprar (abre una nueva pestaña)",
+
+      "empty_state": "No hay productos.",
+
+      "success_msg": "Licencia activada con éxito.",
+      "error_msg": "La clave de licencia o el email no son válidos.",
+      "cleared_msg": "Datos eliminados del terminal.",
+      "error_empty_msg": "Por favor, introduce el email de compra y la clave de licencia.",
+      "validating": "Validando..."
+    },
+    "import": {
+      "title": "Cargar contenido externo",
+
+      "select_btn": "Seleccionar Carpeta",
+      "drag_drop_text": "... o arrastra y suelta los archivos aquí.",
+
+      "error_access": "Error de Acceso",
+      "permission_revoked": "Permiso revocado por el servidor.",
+      "error_no_files": "No se encontraron archivos compatibles.",
+
+      "no_accessible_chapters": "No hay capítulos accesibles.",
+
+      "success_msg": "Archivos importados:"
+    },
+    "help": {
+      "title": "Centro de Ayuda",
+
+      "nav_title": "Navegación y Atajos de Teclado",
+
+      "nav_selector_closed": "<strong>Selector cerrado: </strong>Usa <kbd>Avanzar Página</kbd> o <kbd>Retroceder Página</kbd> para saltar entre Módulos, e <kbd>Inicio</kbd> o <kbd>Fin</kbd> para ir al primer o último capítulo disponible del módulo.",
+      "nav_selector_open": "<strong>Selector abierto: </strong>El comportamiento depende de tu sistema operativo (las flechas navegarán por la lista desplegada).",
+
+      "nav_text_area": "<strong>En el área de texto: </strong>Usa cualquier flecha de dirección (<kbd>↑</kbd>, <kbd>→</kbd>, <kbd>↓</kbd> o <kbd>←</kbd>) para retroceder o avanzar frase a frase, o pulsa <kbd>Avanzar Página</kbd> o <kbd>Retroceder Página</kbd> para saltar párrafos completos, o <kbd>Inicio</kbd> y <kbd>Fin</kbd> para ir a los extremos del capítulo. También puedes clicar directamente en cualquier frase para ir a ella.",
+
+      "nav_toolbar": "<strong>En la barra inferior: </strong>Usa <kbd>←</kbd> y <kbd>→</kbd> para moverte entre los botones, y <kbd>tab</kbd> para saltar entre barras de controles. Usa <kbd>↑</kbd> y <kbd>↓</kbd> para saltar entre frases del texto sin perder de vista los controles.",
+
+      "nav_global_jump": "<strong>Saltos rápidos: </strong>Pulsa <kbd>Avanzar Página</kbd> o <kbd>Retroceder Página</kbd> desde el texto o la barra inferior para saltar por párrafos completos.",
+      "nav_menu_jump": "Y en el menú de configuración Usa <kbd>Tab</kbd> y <kbd>Flecha de Dirección</kbd> para moverte dentro de cada pestaña. Para avanzar rápido, dentro de un pestaña, saltando entre grupos de controles usa <kbd>Alt + ↑</kbd> o <kbd>Alt + ↓</kbd>.",
+      "nav_multimedia": "<strong>Teclado multimedia: </strong>Una vez iniciada la reproducción de un capítulo podrás usar el teclado multimedia de tu dispositivo para parar y reanudar la reproducción o avanzar y retroceder frases.",
+
+      "nav_other": "Recuerda que cualquier navegación manual (clics, toques, etc.) pausará la lectura automática. Para reanudarla, solo tienes que pulsar el botón de reproducir.",
+      "nav_screenreader": "Mientras la reproducción automática está activa el contenido del capitulo será invisible para los lectores de pantalla, para evitar confusiones.",
+
+      "license_title": "Licencias y Acceso Premium",
+      "license_desc": "VortexSpira es Freemium. Los primeros capítulos son gratuitos. Para acceder al resto del curso, debes adquirir una licencia en nuestra página web oficial.",
+      "license_steps": "Una vez comprada, ve a la pestaña <strong>Gestionar Licencia</strong> (icono de la llave) en este mismo panel, introduce tu email de compra y la clave proporcionada para liberar el contenido premium.",
+
+      "exam_title": "Examen y Certificación",
+      "exam_desc": "La certificación se gestiona a través de Hotmart. Al finalizar tu estudio en la PWA, podrás acceder a la plataforma para realizar tu examen tipo test.",
+      "exam_rules": "Necesitas superar el <strong>70% de las preguntas</strong> para obtener tu certificado. Dispones de un máximo de <strong>5 intentos.</strong> Si los agotas, la plataforma te facilitará un enlace seguro para acceder a una prueba diferente, rebajada de precio."
+    }
+  },
+  "app": {
+    "screen_reader_ready": "VortexSpira EdTech. Aplicación y curso cargados correctamente.",
+
+    "drm_login_restore": "Restaurando desde la nube.",
+    "drm_conflict": "Sincronizando dispositivos...",
+    
+    "empty_shell_title": "VortexSpira EdTech",
+    "empty_shell_subtitle": "Modo de Importación Local",
+
+    "module_label": "Módulo:",
+    "chapter_prefix": "Cap",
+
+    "main_content_aria": "Contenido del capítulo",
+    
+    "select_locked_chapter": "Premium",
+    "externals_group": "--- Externos ---",
+
+    "error_critical": "Error crítico. Revise la consola (F12).",
+
+    "copy_group_aria": "Bloque de contenido copiable"
+  }
+}

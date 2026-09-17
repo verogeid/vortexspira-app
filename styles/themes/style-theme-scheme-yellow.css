@@ -1,0 +1,70 @@
+/* --- styles/themes/style-theme-scheme-yellow.css --- */
+
+/* =========================================================
+   MODO ACCESIBILIDAD: AMARILLO SOBRE NEGRO
+   ========================================================= */
+body[data-theme="yellow"] {
+    /* Forzamos el comportamiento de renderizado del navegador */
+    color-scheme: dark;
+    background-color: #000000 !important;
+    color: #FFFF00 !important;
+
+    /* --- Fondos y Superficies --- */
+    --color-background: #000000;
+    --color-surface: #000000;
+    --color-card-bg: #000000;
+    --color-mask-gradient: rgba(0, 0, 0, 0.9);
+
+    /* --- Textos (Máximo Contraso Amarillo/Negro) --- */
+    --color-primary: #FFFF00;
+    --color-secondary: #E6E600;
+    --color-header-text: #FFFF00;
+    --color-footer-text: #FFFF00;
+    
+    /* --- Acentos e Interactividad (Blanco/Oro para Foco) --- */
+    --color-accent: #FFFFFF;
+    --color-accent-bg: rgba(255, 255, 255, 0.15);
+    --color-btn-primary-bg: #FFFFFF;
+    
+    /* --- Bordes --- */
+    --color-border: #FFFF00;
+    --color-input-border: #FFFF00;
+    --color-card-border-disabled: #CACA00;
+    --color-border-placeholder: #CACA00;
+
+    /* --- Estados Semánticos (Unificados para reducir fatiga) --- */
+    --color-success: #FFFF00;
+    --color-success-bg: rgba(255, 255, 0, 0.1);
+    --color-danger: #FFFF00;
+    --color-danger-bg: rgba(255, 255, 0, 0.1);
+    --color-fire: #FFFF00;
+
+    --color-highlight: #ffeb3b; /* Amarillo puro */
+    --color-highlight-text: #111111;
+
+    /* --- Sombras (Eliminadas para evitar borrosidad AAA) --- */
+    --color-shadow-primary: transparent;
+    --color-shadow-disabled: transparent;
+    --color-shadow-modal: rgba(0, 0, 0, 0.9);
+    --shadow-color-hex: #FFFF00;
+    --shadow-opacity: 0.8;
+
+    /* --- UI Específica --- */
+    --color-toast-bg: #FFFF00;
+    --color-toast-text: #000000;
+    --color-details-action-item-hover: rgba(255, 255, 0, 0.15);
+    --ui-readonly-bg: #1a1a00;
+    
+    /* --- Branding --- */
+    --color-icon-obras: #FFFF00;
+    --color-logo-static: #FFFF00;
+    --color-logo-dynamic: #FFFFFF;
+
+    /* --- Accesibilidad Modal --- */
+    --color-a11y-selected-text: #000000;
+    --color-a11y-slider-track: #CACA00;
+    --color-a11y-slider-labels: var(--color-secondary);
+    --color-separator: #FFFF00;
+}
+
+/* --- styles/themes/style-theme-scheme-yellow.css --- */
