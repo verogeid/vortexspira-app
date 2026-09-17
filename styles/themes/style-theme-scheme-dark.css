@@ -8,16 +8,16 @@
         color-scheme: dark;
 
         /* --- Fondos y Superficies --- */
-        --color-background: #111111;
-        --color-surface: #222222;
+        --color-background: #1a1a1a;
+        --color-surface: #262626;
         --color-card-bg: rgba(255, 255, 255, 0.02);
         --color-mask-gradient: rgba(17, 17, 17, 0.4);
 
         /* --- Textos (Ratio AAA > 7:1) --- */
-        --color-primary: #eeeeee;
-        --color-secondary: #b0b0b0;
-        --color-header-text: #ffffff;
-        --color-footer-text: #ffffff;
+        --color-primary: #e6e6e6;
+        --color-secondary: #cccccc;
+        --color-header-text: #e6e6e6;
+        --color-footer-text: #e6e6e6;
         
         /* --- Acentos y Elementos Interactivos (Ratio AAA > 7:1) --- */
         --color-accent: #00E5FF;
@@ -47,8 +47,8 @@
         --shadow-opacity: 0.8;
 
         /* --- UI Específica --- */
-        --color-toast-bg: #222222;
-        --color-toast-text: #ffffff;
+        --color-toast-bg: #262626;
+        --color-toast-text: #e6e6e6;
         --color-details-action-item-hover: rgba(255, 255, 255, 0.05);
         --ui-readonly-bg: #333333;
         
@@ -58,7 +58,7 @@
         --color-logo-dynamic: var(--color-icon-obras);
 
         /* --- Accesibilidad Modal --- */
-        --color-a11y-selected-text: #000000;
+        --color-a11y-selected-text: #1a1a1a;
         --color-a11y-slider-track: #555555;
         --color-a11y-slider-labels: var(--color-secondary);
     }
@@ -70,14 +70,17 @@
 body[data-theme="dark"] {
     color-scheme: dark;
 
-    --color-background: #111111;
-    --color-surface: #222222;
+    --color-background: #1a1a1a;
+    --color-surface: #262626;
+
     --color-card-bg: rgba(255, 255, 255, 0.02);
     --color-mask-gradient: rgba(17, 17, 17, 0.4);
-    --color-primary: #eeeeee;
-    --color-secondary: #b0b0b0;
-    --color-header-text: #ffffff;
-    --color-footer-text: #ffffff;
+
+    --color-primary: #e6e6e6;
+    --color-secondary: #cccccc;
+
+    --color-header-text: #e6e6e6;
+    --color-footer-text: #e6e6e6;
     --color-accent: #00E5FF;
     --color-accent-bg: rgba(0, 229, 255, 0.1);
     --color-btn-primary-bg: #00E5FF;
@@ -99,14 +102,14 @@ body[data-theme="dark"] {
     --color-shadow-modal: rgba(0, 0, 0, 0.7);
     --shadow-color-hex: #888888;
     --shadow-opacity: 0.8;
-    --color-toast-bg: #222222;
-    --color-toast-text: #ffffff;
+    --color-toast-bg: #262626;
+    --color-toast-text: #e6e6e6;
     --color-details-action-item-hover: rgba(255, 255, 255, 0.05);
     --ui-readonly-bg: #333333;
     --color-icon-obras: #FFC107;
     --color-logo-static: #ababab;
     --color-logo-dynamic: var(--color-icon-obras);
-    --color-a11y-selected-text: #000000;
+    --color-a11y-selected-text: #1a1a1a;
     --color-a11y-slider-track: #555555;
     --color-a11y-slider-labels: var(--color-secondary);
 }

@@ -6,20 +6,20 @@
 @media (prefers-contrast: more) {
     :root {
         color-scheme: dark;
-        background-color: #000000 !important;
-        color: #FFFFFF !important;
+        background-color: #121212 !important;
+        color: #e8e8e8 !important;
 
         /* --- Fondos y Superficies --- */
-        --color-background: #000000;
-        --color-surface: #000000;
-        --color-card-bg: #000000;
+        --color-background: #121212;
+        --color-surface: #121212;
+        --color-card-bg: #121212;
         --color-mask-gradient: rgba(0, 0, 0, 0.9);
 
         /* --- Textos (Máximo Contraste Blanco/Negro) --- */
-        --color-primary: #FFFFFF;
+        --color-primary: #e8e8e8;
         --color-secondary: #BDBDBD;
-        --color-header-text: #FFFFFF;
-        --color-footer-text: #FFFFFF;
+        --color-header-text: #e8e8e8;
+        --color-footer-text: #e8e8e8;
         
         /* --- Acentos e Interactividad (Cian de Alto Contraste) --- */
         --color-accent: #00FFFF;
@@ -27,8 +27,8 @@
         --color-btn-primary-bg: #00FFFF;
         
         /* --- Bordes --- */
-        --color-border: #FFFFFF;
-        --color-input-border: #FFFFFF;
+        --color-border: #e8e8e8;
+        --color-input-border: #e8e8e8;
         --color-card-border-disabled: #BDBDBD;
         --color-border-placeholder: #BDBDBD;
 
@@ -39,31 +39,31 @@
         --color-danger-bg: rgba(255, 0, 0, 0.2);
         --color-fire: #FF931E;
         --color-highlight: #ffff00;
-        --color-highlight-text: #000000;
+        --color-highlight-text: #121212;
 
         /* --- Sombras (Anuladas para evitar ruido visual) --- */
         --color-shadow-primary: transparent;
         --color-shadow-disabled: transparent;
         --color-shadow-modal: rgba(255, 255, 255, 0.2);
-        --shadow-color-hex: #FFFFFF;
+        --shadow-color-hex: #e8e8e8;
         --shadow-opacity: 0;
 
         /* --- UI Específica --- */
-        --color-toast-bg: #FFFFFF;
-        --color-toast-text: #000000;
+        --color-toast-bg: #e8e8e8;
+        --color-toast-text: #121212;
         --color-details-action-item-hover: rgba(0, 255, 255, 0.2);
         --ui-readonly-bg: #222222;
         
         /* --- Branding --- */
         --color-icon-obras: #FFFF00;
-        --color-logo-static: #FFFFFF;
+        --color-logo-static: #e8e8e8;
         --color-logo-dynamic: var(--color-icon-obras);
 
         /* --- Accesibilidad Modal --- */
-        --color-a11y-selected-text: #000000;
-        --color-a11y-slider-track: #FFFFFF;
-        --color-a11y-slider-labels: #FFFFFF;
-        --color-separator: #FFFFFF;
+        --color-a11y-selected-text: #121212;
+        --color-a11y-slider-track: #e8e8e8;
+        --color-a11y-slider-labels: #e8e8e8;
+        --color-separator: #e8e8e8;
     }
 }
 
@@ -72,20 +72,20 @@
    ========================================================= */
 body[data-theme="contrast"] {
     color-scheme: dark;
-    background-color: #000000 !important;
-    color: #FFFFFF !important;
+    background-color: #121212 !important;
+    color: #e8e8e8 !important;
 
     /* --- Fondos y Superficies --- */
-    --color-background: #000000;
-    --color-surface: #000000;
-    --color-card-bg: #000000;
+    --color-background: #121212;
+    --color-surface: #121212;
+    --color-card-bg: #121212;
     --color-mask-gradient: rgba(0, 0, 0, 0.9);
 
     /* --- Textos --- */
-    --color-primary: #FFFFFF;
+    --color-primary: #e8e8e8;
     --color-secondary: #BDBDBD;
-    --color-header-text: #FFFFFF;
-    --color-footer-text: #FFFFFF;
+    --color-header-text: #e8e8e8;
+    --color-footer-text: #e8e8e8;
     
     /* --- Acentos --- */
     --color-accent: #00FFFF;
@@ -93,8 +93,8 @@ body[data-theme="contrast"] {
     --color-btn-primary-bg: #00FFFF;
     
     /* --- Bordes --- */
-    --color-border: #FFFFFF;
-    --color-input-border: #FFFFFF;
+    --color-border: #e8e8e8;
+    --color-input-border: #e8e8e8;
     --color-card-border-disabled: #BDBDBD;
     --color-border-placeholder: #BDBDBD;
 
@@ -105,31 +105,31 @@ body[data-theme="contrast"] {
     --color-danger-bg: rgba(255, 0, 0, 0.2);
     --color-fire: #FF931E;
     --color-highlight: #ffff00;
-    --color-highlight-text: #000000;
+    --color-highlight-text: #121212;
 
     /* --- Sombras --- */
     --color-shadow-primary: transparent;
     --color-shadow-disabled: transparent;
     --color-shadow-modal: rgba(255, 255, 255, 0.2);
-    --shadow-color-hex: #FFFFFF;
+    --shadow-color-hex: #e8e8e8;
     --shadow-opacity: 0;
 
     /* --- UI Específica --- */
-    --color-toast-bg: #FFFFFF;
-    --color-toast-text: #000000;
+    --color-toast-bg: #e8e8e8;
+    --color-toast-text: #121212;
     --color-details-action-item-hover: rgba(0, 255, 255, 0.2);
     --ui-readonly-bg: #222222;
     
     /* --- Branding --- */
     --color-icon-obras: #FFFF00;
-    --color-logo-static: #FFFFFF;
+    --color-logo-static: #e8e8e8;
     --color-logo-dynamic: var(--color-icon-obras);
 
     /* --- Accesibilidad Modal --- */
-    --color-a11y-selected-text: #000000;
-    --color-a11y-slider-track: #FFFFFF;
-    --color-a11y-slider-labels: #FFFFFF;
-    --color-separator: #FFFFFF;
+    --color-a11y-selected-text: #121212;
+    --color-a11y-slider-track: #e8e8e8;
+    --color-a11y-slider-labels: #e8e8e8;
+    --color-separator: #e8e8e8;
 }
 
 /* --- styles/themes/style-theme-scheme-contrast.css --- */
