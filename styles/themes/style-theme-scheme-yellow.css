@@ -6,65 +6,65 @@
 body[data-theme="yellow"] {
     /* Forzamos el comportamiento de renderizado del navegador */
     color-scheme: dark;
-    background-color: #000000 !important;
-    color: #FFFF00 !important;
+    background-color: #161616 !important;
+    color: #d6d600 !important;
 
     /* --- Fondos y Superficies --- */
-    --color-background: #000000;
-    --color-surface: #000000;
-    --color-card-bg: #000000;
+    --color-background: #161616;
+    --color-surface: #161616;
+    --color-card-bg: #161616;
     --color-mask-gradient: rgba(0, 0, 0, 0.9);
 
     /* --- Textos (Máximo Contraso Amarillo/Negro) --- */
-    --color-primary: #FFFF00;
-    --color-secondary: #E6E600;
-    --color-header-text: #FFFF00;
-    --color-footer-text: #FFFF00;
+    --color-primary: #d6d600;
+    --color-secondary: #b8b800;
+    --color-header-text: #d6d600;
+    --color-footer-text: #d6d600;
     
     /* --- Acentos e Interactividad (Blanco/Oro para Foco) --- */
-    --color-accent: #FFFFFF;
+    --color-accent: #e0e0e0;
     --color-accent-bg: rgba(255, 255, 255, 0.15);
-    --color-btn-primary-bg: #FFFFFF;
+    --color-btn-primary-bg: #e0e0e0;
     
     /* --- Bordes --- */
-    --color-border: #FFFF00;
-    --color-input-border: #FFFF00;
+    --color-border: #d6d600;
+    --color-input-border: #d6d600;
     --color-card-border-disabled: #CACA00;
     --color-border-placeholder: #CACA00;
 
     /* --- Estados Semánticos (Unificados para reducir fatiga) --- */
-    --color-success: #FFFF00;
+    --color-success: #d6d600;
     --color-success-bg: rgba(255, 255, 0, 0.1);
-    --color-danger: #FFFF00;
+    --color-danger: #d6d600;
     --color-danger-bg: rgba(255, 255, 0, 0.1);
-    --color-fire: #FFFF00;
+    --color-fire: #d6d600;
 
     --color-highlight: #ffeb3b; /* Amarillo puro */
-    --color-highlight-text: #111111;
+    --color-highlight-text: #161616;
 
     /* --- Sombras (Eliminadas para evitar borrosidad AAA) --- */
     --color-shadow-primary: transparent;
     --color-shadow-disabled: transparent;
     --color-shadow-modal: rgba(0, 0, 0, 0.9);
-    --shadow-color-hex: #FFFF00;
+    --shadow-color-hex: #d6d600;
     --shadow-opacity: 0.8;
 
     /* --- UI Específica --- */
-    --color-toast-bg: #FFFF00;
-    --color-toast-text: #000000;
+    --color-toast-bg: #d6d600;
+    --color-toast-text: #161616;
     --color-details-action-item-hover: rgba(255, 255, 0, 0.15);
-    --ui-readonly-bg: #1a1a00;
+    --ui-readonly-bg: #161616;
     
     /* --- Branding --- */
-    --color-icon-obras: #FFFF00;
-    --color-logo-static: #FFFF00;
-    --color-logo-dynamic: #FFFFFF;
+    --color-icon-obras: #d6d600;
+    --color-logo-static: #d6d600;
+    --color-logo-dynamic: #e0e0e0;
 
     /* --- Accesibilidad Modal --- */
-    --color-a11y-selected-text: #000000;
+    --color-a11y-selected-text: #161616;
     --color-a11y-slider-track: #CACA00;
     --color-a11y-slider-labels: var(--color-secondary);
-    --color-separator: #FFFF00;
+    --color-separator: #d6d600;
 }
 
 /* --- styles/themes/style-theme-scheme-yellow.css --- */
